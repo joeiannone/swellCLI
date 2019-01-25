@@ -1,4 +1,9 @@
-import sys
+# @Author: Joe Iannone
+# @Date:   2019-01-22T21:27:47-05:00
+# @Filename: client.py
+# @Last modified by:   Joe Iannone
+# @Last modified time: 2019-01-24T19:53:47-05:00
+
 
 class Client:
 
@@ -15,14 +20,13 @@ class Client:
     local_url1 = root + '/surf-forecast/fetch-timeline-data/loc/wna_nj_capemay'
     local_url2 = root + '/surf-forecast/fetch-timeline-swell-data/loc/wna_nj_capemay'
 
-    def __init__(self):
-        pass
+    def __init__(self, request_handler):
+        self.request_handler = request_handler
 
-    def getRegions():
-        pass
+    def getSubAreas(self, region):
+        resp = self.request_handler.http_get(Client.region_url + region)
+        return resp
 
-    def getSubAreas(region):
-        pass
-
-    def getLocalData(subArea):
-        pass
+    def getLocalAreas(self, subArea):
+        resp = self.request_handler.http_get(Client.sub_area_url + subArea)
+        return resp
