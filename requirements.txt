@@ -1,3 +1,4 @@
 requests==2.18.4
 BeautifulSoup4==4.6.0
 html5lib==1.0.1
+tabulate==0.8.3

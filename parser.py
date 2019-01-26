@@ -2,7 +2,7 @@
 # @Date:   2019-01-25T17:25:40-05:00
 # @Filename: parser.py
 # @Last modified by:   josephiannone
-# @Last modified time: 2019-01-25T22:23:18-05:00
+# @Last modified time: 2019-01-25T22:26:21-05:00
 
 class swellParser():
 
