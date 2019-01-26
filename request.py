@@ -1,8 +1,8 @@
 # @Author: Joe Iannone
 # @Date:   2019-01-24T17:44:41-05:00
 # @Filename: request.py
-# @Last modified by:   Joe Iannone
-# @Last modified time: 2019-01-24T18:12:07-05:00
+# @Last modified by:   josephiannone
+# @Last modified time: 2019-01-25T22:21:02-05:00
 
 from requests import get
 from requests.exceptions import RequestException
