@@ -2,7 +2,7 @@
 # @Date:   2019-01-24T17:35:01-05:00
 # @Filename: client.py
 # @Last modified by:   josephiannone
-# @Last modified time: 2019-01-25T22:20:56-05:00
+# @Last modified time: 2019-01-25T22:22:35-05:00
 
 import sys
 import os.path
@@ -27,7 +27,7 @@ local_areas = json.loads(client.getLocalAreas(sub_area))
 print(sub_area)
 
 local_area = list(local_areas.keys())[random.randint(0, len(local_areas)-1)]
-swell_html = client.getSwellHTML('marthas-vineyard-massachusetts')
+swell_html = client.getSwellHTML(local_area)
 swell_soup = BeautifulSoup(swell_html, 'html5lib')
 swell_parser = swellParser(swell_soup)
 
