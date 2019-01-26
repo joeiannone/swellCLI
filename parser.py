@@ -2,7 +2,7 @@
 # @Date:   2019-01-25T17:25:40-05:00
 # @Filename: parser.py
 # @Last modified by:   josephiannone
-# @Last modified time: 2019-01-25T22:20:48-05:00
+# @Last modified time: 2019-01-25T22:23:18-05:00
 
 class swellParser():
 
@@ -57,7 +57,7 @@ class swellParser():
             hourly_wind = day.find_all('div', {'class': 'fcst-day-hourly-wind'})
             hourly_swell = day.find_all('div', {'class': 'fcst-day-hourly-swell'})
             hourly_weather = day.find_all('div', {'class': 'fcst-day-hourly-wx-text'})
-            print(len(hourly_weather))
+
             day_dict['hourly_title'] = []
             day_dict['hourly_wind'] = []
             day_dict['hourly_swell'] = []
