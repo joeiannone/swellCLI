@@ -2,7 +2,7 @@
 # @Date:   2019-01-26T16:56:12-05:00
 # @Filename: cli.py
 # @Last modified by:   josephiannone
-# @Last modified time: 2019-01-27T01:00:59-05:00
+# @Last modified time: 2019-01-27T01:04:50-05:00
 
 import json
 import pprint
@@ -37,6 +37,8 @@ class swellCLI:
         request_handler = RequestHandler()
         swell = Client(request_handler)
 
+
+
         print('')
         for i, region in enumerate(swell.regions):
             print(swellCLI.BOLD + str(i) + swellCLI.ENDC + ' --> ' + region['display'])
@@ -46,6 +48,8 @@ class swellCLI:
         region = swell.regions[int(region_input)]['ref']
 
         sub_areas = json.loads(swell.getSubAreas(region))
+
+
 
         print('')
         sub_area_refs = []
@@ -58,6 +62,9 @@ class swellCLI:
         sub_area = sub_area_refs[int(sub_area_input)]
 
         local_areas = json.loads(swell.getLocalAreas(sub_area))
+
+
+
         print('')
         local_area_refs = []
         for i, local_area in enumerate(local_areas):
