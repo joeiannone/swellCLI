@@ -2,7 +2,7 @@
 # @Date:   2019-01-26T16:56:12-05:00
 # @Filename: cli.py
 # @Last modified by:   josephiannone
-# @Last modified time: 2019-01-26T17:08:05-05:00
+# @Last modified time: 2019-01-27T01:00:59-05:00
 
 import json
 import pprint
@@ -84,3 +84,6 @@ class swellCLI:
         elif foc is 'c':
             current = swell_parser.getCurrentConditions()
             pprint.pprint(current)
+
+    def input(self, data_options):
+        pass
