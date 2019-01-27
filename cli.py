@@ -2,7 +2,7 @@
 # @Date:   2019-01-26T16:56:12-05:00
 # @Filename: cli.py
 # @Last modified by:   josephiannone
-# @Last modified time: 2019-01-27T01:04:50-05:00
+# @Last modified time: 2019-01-27T15:05:07-05:00
 
 import json
 import pprint
@@ -29,51 +29,24 @@ class swellCLI:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-    def __init__(self):
-        self.run()
-
     def run(self):
 
         request_handler = RequestHandler()
+
         swell = Client(request_handler)
 
-
-
         print('')
-        for i, region in enumerate(swell.regions):
-            print(swellCLI.BOLD + str(i) + swellCLI.ENDC + ' --> ' + region['display'])
 
-        print('')
-        region_input = input('Select a region: ')
-        region = swell.regions[int(region_input)]['ref']
+        region = self.getLocationInput(swell.regions, 'region')
 
         sub_areas = json.loads(swell.getSubAreas(region))
 
-
-
-        print('')
-        sub_area_refs = []
-        for i, sub_area in enumerate(sub_areas):
-            sub_area_refs.append(sub_area)
-            print(str(i) + ' --> ' + sub_areas[sub_area]['label'])
-
-        print('')
-        sub_area_input = input('Select a sub area: ')
-        sub_area = sub_area_refs[int(sub_area_input)]
+        sub_area = self.getLocationInput(sub_areas, 'sub area')
 
         local_areas = json.loads(swell.getLocalAreas(sub_area))
 
+        local_area = self.getLocationInput(local_areas, 'local area')
 
-
-        print('')
-        local_area_refs = []
-        for i, local_area in enumerate(local_areas):
-            local_area_refs.append(local_area)
-            print(str(i) + ' --> ' + local_areas[local_area]['label'])
-
-        print('')
-        local_area_input = input('Select a local area: ')
-        local_area = local_area_refs[int(local_area_input)]
 
         print('')
         foc = input('forecast or current? (f | c): ')
@@ -92,5 +65,18 @@ class swellCLI:
             current = swell_parser.getCurrentConditions()
             pprint.pprint(current)
 
-    def input(self, data_options):
-        pass
+
+
+    def getLocationInput(self, data_list, selection_str):
+
+        refs = []
+        for i, item in enumerate(data_list):
+            refs.append(item)
+            print(swellCLI.BOLD + str(i) + swellCLI.ENDC + ' --> ' + data_list[item]['label'])
+
+        print('')
+        user_input = input('Select a ' + selection_str + ' (0-' + str(len(data_list)-1) + '): ')
+
+        print('\nSelected ' + swellCLI.BOLD + data_list[refs[int(user_input)]]['label'] + swellCLI.ENDC + '\n')
+
+        return refs[int(user_input)]

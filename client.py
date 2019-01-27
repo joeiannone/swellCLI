@@ -2,16 +2,16 @@
 # @Date:   2019-01-22T21:27:47-05:00
 # @Filename: client.py
 # @Last modified by:   josephiannone
-# @Last modified time: 2019-01-25T23:28:58-05:00
+# @Last modified time: 2019-01-27T14:40:57-05:00
 
 class Client:
 
-    regions = [
-    {'ref': 'usa', 'display': 'United States'},
-    {'ref': 'mex', 'display': 'Mexico'},
-    {'ref': 'cenam', 'display': 'Central America'},
-    {'ref': 'carib', 'display': 'Caribbean'}
-    ]
+    regions = {
+    'usa': {'label': 'United States'},
+    'mex': {'label': 'Mexico'},
+    'cenam': {'label': 'Central America'},
+    'carib': {'label': 'Caribbean'},
+    }
     root = 'http://swellinfo.com'
     region_url = root + '/jsmenus_json.php?js_region='
     sub_area_url = root + '/jsmenus_json.php?sub_area='
