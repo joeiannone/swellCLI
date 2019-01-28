@@ -2,7 +2,7 @@
 # @Date:   2019-01-26T16:56:12-05:00
 # @Filename: cli.py
 # @Last modified by:   josephiannone
-# @Last modified time: 2019-01-27T15:05:07-05:00
+# @Last modified time: 2019-01-27T22:34:24-05:00
 
 import json
 import pprint
@@ -69,14 +69,19 @@ class swellCLI:
 
     def getLocationInput(self, data_list, selection_str):
 
-        refs = []
-        for i, item in enumerate(data_list):
-            refs.append(item)
-            print(swellCLI.BOLD + str(i) + swellCLI.ENDC + ' --> ' + data_list[item]['label'])
+        while 1:
+            refs = []
+            for i, item in enumerate(data_list):
+                refs.append(item)
+                print(swellCLI.BOLD + str(i) + swellCLI.ENDC + ' --> ' + data_list[item]['label'])
 
-        print('')
-        user_input = input('Select a ' + selection_str + ' (0-' + str(len(data_list)-1) + '): ')
+            print('')
+            user_input = input('Select a ' + selection_str + ' (0-' + str(len(data_list)-1) + '): ')
+            try:
+                if int(user_input) >= 0 and int(user_input) <= len(data_list)-1:
+                    print('\nSelected ' + swellCLI.BOLD + data_list[refs[int(user_input)]]['label'] + swellCLI.ENDC + '\n')
+                    return refs[int(user_input)]
+            except:
+                pass
 
-        print('\nSelected ' + swellCLI.BOLD + data_list[refs[int(user_input)]]['label'] + swellCLI.ENDC + '\n')
-
-        return refs[int(user_input)]
+            print(swellCLI.RED + '\nTry again. Input must be an integer from 0-' + str(len(data_list)-1) + '\n' + swellCLI.ENDC)
