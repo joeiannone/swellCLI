@@ -2,7 +2,7 @@
 # @Date:   2019-01-25T17:25:40-05:00
 # @Filename: parser.py
 # @Last modified by:   josephiannone
-# @Last modified time: 2019-01-25T22:26:21-05:00
+# @Last modified time: 2019-02-26T18:23:30-05:00
 
 class swellParser():
 
@@ -18,7 +18,7 @@ class swellParser():
         current = {}
         current['location_title'] = self.html.find('h1', {'class': 'fcst-loc-name-label'}).text.strip()
         current['air'] = self.html.find("div", {'class': 'wx-icon-temp'}).string.strip()
-        current['wind'] = self.html.find("div", {'class': 'wx-icons-wind-desc'}).string.strip()
+        current['wind'] = self.html.find("div", {'class': 'surf-data-wind-data'}).string.strip()
         current['buoy_name'] = current_buoy.find('div', {'class': 'wx-icon-buoy-name'}).string.strip()
         current['wave_height'] = current_buoy.find(attrs={'class': None}).string.strip()
         current['low_tide'] = current_tide[0].getText()[3:]

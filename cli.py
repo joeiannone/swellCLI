@@ -2,7 +2,7 @@
 # @Date:   2019-01-26T16:56:12-05:00
 # @Filename: cli.py
 # @Last modified by:   josephiannone
-# @Last modified time: 2019-01-27T22:34:24-05:00
+# @Last modified time: 2019-02-26T18:23:34-05:00
 
 import json
 import pprint
@@ -62,9 +62,9 @@ class swellCLI:
             pprint.pprint(forecast)
 
         elif foc is 'c':
-            current = swell_parser.getCurrentConditions()
-            pprint.pprint(current)
-
+            current = self.getCurrentString(swell_parser.getCurrentConditions())
+            #pprint.pprint(current)
+            print(current)
 
 
     def getLocationInput(self, data_list, selection_str):
@@ -85,3 +85,19 @@ class swellCLI:
                 pass
 
             print(swellCLI.RED + '\nTry again. Input must be an integer from 0-' + str(len(data_list)-1) + '\n' + swellCLI.ENDC)
+
+
+    def getCurrentString(self, data):
+        current = self.BOLD + self.OKYELLOW + data['location_title'] + self.ENDC + '\n'
+        current += tabulate({
+            'Air': [data['air'], data['wind']],
+            'Height': [data['buoy_name'], data['wave_height']],
+            'Tide': ['low: ' + data['low_tide'], 'high: ' + data['high_tide']],
+            'Water': [data['water_temp'], data['wetsuit']]
+        }, headers="keys", tablefmt="rst")
+        return current
+
+    def getForecastString(self, data):
+        forecast = ''
+
+        return forecast
