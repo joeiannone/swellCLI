@@ -2,9 +2,9 @@
 # @Date:   2019-01-26T16:56:12-05:00
 # @Filename: cli.py
 # @Last modified by:   josephiannone
-# @Last modified time: 2019-02-26T18:23:34-05:00
+# @Last modified time: 2019-05-14T20:28:21-04:00
 
-import json
+import json, os, sys
 import pprint
 from bs4 import BeautifulSoup
 from tabulate import tabulate
@@ -29,24 +29,93 @@ class swellCLI:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
+    def __init__(self):
+
+        self.user_directory = 'user_data'
+        try:
+            os.stat(self.user_directory)
+        except:
+            os.mkdir(self.user_directory)
+
+        self.swellFile = self.user_directory+'/swell.json'
+        self.user_data = self.read_json(self.swellFile)
+        self.init_data = {'defaultKey': 0, 'favorites': []}
+
+        self.request_handler = RequestHandler()
+        self.swell = Client(self.request_handler)
+
+        self.run()
+
+
     def run(self):
 
-        request_handler = RequestHandler()
+        if self.user_data is None:
+            self.write_json(self.swellFile, self.init_data)
+            self.user_data = self.read_json(self.swellFile)
 
-        swell = Client(request_handler)
+        if not self.user_data['favorites'] or not self.user_data['favorites'][self.user_data['defaultKey']]:
+            print('\nFollow the prompts below to setup your default location.\n')
+            print('')
 
-        print('')
+            if self.addLocationRoutine():
+                print('\nDefault spot created. \nYou can now easily check the conditions and forecast for ' + self.user_data['favorites'][self.user_data['defaultKey']]['title'] + '.\n')
+            else:
+                print('')
+        else:
 
-        region = self.getLocationInput(swell.regions, 'region')
+            ###############################
+            # Now check args
+            ###############################
 
-        sub_areas = json.loads(swell.getSubAreas(region))
+            self.args = sys.argv
+            self.args.pop(0) # remove first arg
 
-        sub_area = self.getLocationInput(sub_areas, 'sub area')
+            self.default_location = self.user_data['favorites'][self.user_data['defaultKey']]
 
-        local_areas = json.loads(swell.getLocalAreas(sub_area))
+            if len(self.args) is 0:
+                swell_html = self.swell.getSwellHTML(self.default_location['link'])
+                swell_soup = BeautifulSoup(swell_html, 'lxml')
+                swell_parser = swellParser(swell_soup)
+                current = self.getCurrentString(swell_parser.getCurrentConditions())
+                print(current)
 
-        local_area = self.getLocationInput(local_areas, 'local area')
+            else:
 
+                self.cmd = {'subargs': [], 'nickname': ''}
+
+                # loop through args
+                for i, arg in enumerate(self.args):
+
+                    if arg[0] is '-':
+                        # sub args
+                        subargs = list(arg)
+
+                        subargs.pop(0) # remove '-'
+                        self.cmd['subargs'] = subargs
+
+                        if i is 0 and len(self.args) > 1:
+                            self.cmd['nickname'] = self.args[1]
+                        elif i is not 0:
+                            self.cmd['nickname'] = self.args[0]
+
+                    elif arg == 'add':
+                        print('\nFollow the prompts below to add a new location.\n')
+                        print('')
+
+                        if self.addLocationRoutine():
+                            print('\nSpot added. \nYou can now easily check the conditions and forecast for ' + self.user_data['favorites'][self.user_data['defaultKey']]['title'] + '.\n')
+
+                    elif arg is 'spots':
+
+                        pass
+
+                    else:
+
+                        pass
+
+                    print(arg)
+
+        sys.exit(0)
 
         print('')
         foc = input('forecast or current? (f | c): ')
@@ -67,8 +136,23 @@ class swellCLI:
             print(current)
 
 
-    def getLocationInput(self, data_list, selection_str):
+    def addLocationRoutine(self):
+        try:
+            region = self.getLocationInput(self.swell.regions, 'region')
+            sub_areas = json.loads(self.swell.getSubAreas(region))
+            sub_area = self.getLocationInput(sub_areas, 'sub area')
+            local_areas = json.loads(self.swell.getLocalAreas(sub_area))
+            local_area = self.getLocationInput(local_areas, 'local area')
+            self.user_data['favorites'].append({'link': local_area, 'title': local_areas[local_area]['label']})
+            
+            self.write_json(self.swellFile, self.user_data)
+        except Exception as e:
+            print(e)
+            return False
 
+        return True
+
+    def getLocationInput(self, data_list, selection_str):
         while 1:
             refs = []
             for i, item in enumerate(data_list):
@@ -97,7 +181,29 @@ class swellCLI:
         }, headers="keys", tablefmt="rst")
         return current
 
+
     def getForecastString(self, data):
         forecast = ''
-
         return forecast
+
+
+    def write_json(self, filename, data):
+      try:
+        with open(filename, 'w+') as outfile:
+          json.dump(data, outfile)
+        outfile.close()
+        return True
+      except:
+        return False
+
+
+    def read_json(self, filename):
+      try:
+        with open(filename) as json_data:
+          d = json.load(json_data)
+        json_data.close()
+        return d
+      except json.JSONDecodeError:
+        return None
+      except FileNotFoundError:
+        return None
