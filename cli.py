@@ -113,7 +113,7 @@ class swellCLI:
 
                         pass
 
-                    print(arg)
+                    #print(arg)
 
         sys.exit(0)
 
@@ -144,7 +144,7 @@ class swellCLI:
             local_areas = json.loads(self.swell.getLocalAreas(sub_area))
             local_area = self.getLocationInput(local_areas, 'local area')
             self.user_data['favorites'].append({'link': local_area, 'title': local_areas[local_area]['label']})
-            
+
             self.write_json(self.swellFile, self.user_data)
         except Exception as e:
             print(e)

@@ -19,6 +19,8 @@ $ pip install -r requirements.txt
 $ python main.py [args]
 ```
 
+#### ATTENTION: Following documentation is not accurate for current version.
+
 ### CLI:
 - **no args**    -- Returns current conditions for your default location
 - **add**        -- Prompts to add a location to 'favorite spots' that can be referenced later with a nickname
