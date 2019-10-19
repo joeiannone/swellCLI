@@ -6,10 +6,14 @@
 
 class swellParser():
 
+    # A class to parse raw html from swellinfo into something usable.
+
     def __init__(self, html):
         self.html = html
 
     def getCurrentConditions(self):
+
+        # Parse current condition data into a dictionary
 
         current_buoy = self.html.find("div", {'class': 'wx-icon-buoy-data'})
         current_tide = self.html.find("div", {'class': 'wx-icon-tide-data'}).find_all('div', attrs={'class': None})
@@ -29,6 +33,8 @@ class swellParser():
         return current
 
     def getForecast(self):
+
+        # Parse forecast data into a dictionary
 
         forecast_days = self.html.find_all('li', {'class': 'fcst-day'})
 

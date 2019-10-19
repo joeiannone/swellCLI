@@ -6,6 +6,9 @@
 
 class Client:
 
+    # This class acts as an HTTP interface for the swellinfo website
+
+    # Some static swellinfo.com url parts
     regions = {
     'usa': {'label': 'United States'},
     'mex': {'label': 'Mexico'},
@@ -21,13 +24,16 @@ class Client:
         self.request_handler = request_handler
 
     def getSubAreas(self, region):
+        # request/retrieve swellinfo 'Sub areas'
         resp = self.request_handler.http_get(Client.region_url + region)
         return resp
 
     def getLocalAreas(self, subArea):
+        # request/retrieve swellinfo 'Local areas'
         resp = self.request_handler.http_get(Client.sub_area_url + subArea)
         return resp
 
     def getSwellHTML(self, localArea):
+        # request/retrieve swellinfo html of 'Local area' page
         resp = self.request_handler.http_get(Client.local_url + localArea)
         return resp

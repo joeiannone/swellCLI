@@ -9,22 +9,22 @@
 
 import sys
 
-# python version check and warning
+# Python version check and warning
 pyv = sys.version_info
 pyv_str = str(pyv[0]) + '.' + str(pyv[1])
 if float(pyv_str) < 3.6:
     print('\nERROR: You must use python version 3.6 or higher.')
     print('This is version ' + pyv_str + '\n')
-    sys.exit()
+    sys.exit(1)
 
 
-# check dependencies
+# Check dependencies
 try:
-    from cli import swellCLI
+    from src.cli import swellCLI
 except ImportError:
   print('\nDependencies not installed.')
   print('\nrun:\n\tpip install -r requirements.txt\n')
-  sys.exit()
+  sys.exit(0)
 
 
 def main():
