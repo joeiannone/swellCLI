@@ -1,6 +1,6 @@
 # swell-cli :ocean::surfer:
 
-## ATTENTION: Following documentation is no longer accurate - the swellinfo.com website was recently updated (drastically) so this tool is under development to adapt to the changes.
+### ATTENTION: Following documentation is no longer accurate - the swellinfo.com website was recently updated (drastically) so this tool is under development to adapt to the changes.
 
 ## A command line interface for checking the surf!
 
