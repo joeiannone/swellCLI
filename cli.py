@@ -143,7 +143,8 @@ class swellCLI:
             sub_area = self.getLocationInput(sub_areas, 'sub area')
             local_areas = json.loads(self.swell.getLocalAreas(sub_area))
             local_area = self.getLocationInput(local_areas, 'local area')
-            self.user_data['favorites'].append({'link': local_area, 'title': local_areas[local_area]['label']})
+
+            self.user_data['favorites'].append({'link': local_area, 'title': local_areas[local_area]['label'], 'nickname': local_areas[local_area]['label']})
 
             self.write_json(self.swellFile, self.user_data)
         except Exception as e:
@@ -178,7 +179,7 @@ class swellCLI:
             'Height': [data['buoy_name'], data['wave_height']],
             'Tide': ['low: ' + data['low_tide'], 'high: ' + data['high_tide']],
             'Water': [data['water_temp'], data['wetsuit']]
-        }, headers="keys", tablefmt="rst")
+        }, headers="keys", tablefmt="")
         return current
 
 

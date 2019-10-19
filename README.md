@@ -1,5 +1,7 @@
 # swell-cli :ocean::surfer:
 
+## ATTENTION: Following documentation is no longer accurate - the swellinfo.com website was recently updated (drastically) so this tool is under development to adapt to the changes.
+
 ## A command line interface for checking the surf!
 
 An ongoing project. I plan to continue working on this with the hopes of continously increasing the robustness and reliability of the data acquisition. But otherwise just a fun program for the time being and pretty convenient for anyone who happens to be a developer and a surfer.
@@ -18,8 +20,6 @@ $ pip install -r requirements.txt
 ```
 $ python main.py [args]
 ```
-
-#### ATTENTION: Following documentation is not accurate for current version.
 
 ### CLI:
 - **no args**    -- Returns current conditions for your default location
