@@ -12,6 +12,10 @@ from client import Client
 from request import RequestHandler
 from parser import swellParser
 
+
+# TODO: DO AWAY WITH DEFAULT
+
+
 class swellCLI:
 
     HEADER = '\033[95m'
@@ -51,16 +55,14 @@ class swellCLI:
 
         if self.user_data is None:
             self.write_json(self.swellFile, self.init_data)
-            self.user_data = self.read_json(self.swellFile)
+
+        self.user_data = self.read_json(self.swellFile)
 
         if not self.user_data['favorites'] or not self.user_data['favorites'][self.user_data['defaultKey']]:
-            print('\nFollow the prompts below to setup your default location.\n')
-            print('')
 
             if self.addLocationRoutine():
-                print('\nDefault spot created. \nYou can now easily check the conditions and forecast for ' + self.user_data['favorites'][self.user_data['defaultKey']]['title'] + '.\n')
-            else:
-                print('')
+                print('\nThis is your default spot.\n')
+
         else:
 
             ###############################
@@ -99,11 +101,8 @@ class swellCLI:
                             self.cmd['nickname'] = self.args[0]
 
                     elif arg == 'add':
-                        print('\nFollow the prompts below to add a new location.\n')
-                        print('')
+                        self.addLocationRoutine()
 
-                        if self.addLocationRoutine():
-                            print('\nSpot added. \nYou can now easily check the conditions and forecast for ' + self.user_data['favorites'][self.user_data['defaultKey']]['title'] + '.\n')
 
                     elif arg is 'spots':
 
@@ -117,26 +116,10 @@ class swellCLI:
 
         sys.exit(0)
 
-        print('')
-        foc = input('forecast or current? (f | c): ')
-        print('...\n')
-
-
-        swell_html = swell.getSwellHTML(local_area)
-        swell_soup = BeautifulSoup(swell_html, 'lxml')
-        swell_parser = swellParser(swell_soup)
-
-        if foc is 'f':
-            forecast = swell_parser.getForecast()
-            pprint.pprint(forecast)
-
-        elif foc is 'c':
-            current = self.getCurrentString(swell_parser.getCurrentConditions())
-            #pprint.pprint(current)
-            print(current)
 
 
     def addLocationRoutine(self):
+        print('\nFollow the prompts below to add a favorite location.\n')
         try:
             region = self.getLocationInput(self.swell.regions, 'region')
             sub_areas = json.loads(self.swell.getSubAreas(region))
@@ -144,33 +127,62 @@ class swellCLI:
             local_areas = json.loads(self.swell.getLocalAreas(sub_area))
             local_area = self.getLocationInput(local_areas, 'local area')
 
-            self.user_data['favorites'].append({'link': local_area, 'title': local_areas[local_area]['label'], 'nickname': local_areas[local_area]['label']})
+            self.user_data['favorites'].append({'link': local_area, 'title': local_areas[local_area]['label'], 'nickname': ''})
 
-            self.write_json(self.swellFile, self.user_data)
+            nickname = self.getNicknameRoutine(self.user_data['favorites'][-1])
+            self.user_data['favorites'][-1]['nickname'] = nickname
+
+            if (self.write_json(self.swellFile, self.user_data)):
+                print(self.BOLD + '\nSpot added.' + self.ENDC)
+
         except Exception as e:
             print(e)
             return False
 
+        print('\nYou can now easily check the conditions and forecast for ' + \
+            self.BOLD + local_areas[local_area]['label'] + self.ENDC + ' using the nickname ' + \
+            self.BOLD + nickname + self.ENDC + ' as a command line argument.\n')
+
         return True
+
+    def getNicknameRoutine(self, spot):
+        print('Add a nickname for this spot. (no spaces, limit 20 characters)')
+        while 1:
+
+            user_input = input('Nickname for ' + spot['title'] + ': ')
+
+            if len(user_input) > 20 or ' ' in user_input:
+                print('\nInvalid nickname. Try again.\n')
+                continue
+
+            if self.nicknameIsTaken(user_input):
+                print('\nThat nickname is already taken. Try again\n')
+                continue
+
+            return user_input
 
     def getLocationInput(self, data_list, selection_str):
         while 1:
             refs = []
             for i, item in enumerate(data_list):
                 refs.append(item)
-                print(swellCLI.BOLD + str(i) + swellCLI.ENDC + ' --> ' + data_list[item]['label'])
+                print(swellCLI.BOLD + '{0: <2}'.format(str(i)) + swellCLI.ENDC + ' --> ' + data_list[item]['label'])
 
-            print('')
-            user_input = input('Select a ' + selection_str + ' (0-' + str(len(data_list)-1) + '): ')
+            user_input = input('\nSelect a ' + selection_str + ' (0-' + str(len(data_list)-1) + '): ')
             try:
                 if int(user_input) >= 0 and int(user_input) <= len(data_list)-1:
-                    print('\nSelected ' + swellCLI.BOLD + data_list[refs[int(user_input)]]['label'] + swellCLI.ENDC + '\n')
+                    print('Selected ' + swellCLI.BOLD + data_list[refs[int(user_input)]]['label'] + swellCLI.ENDC + '\n')
                     return refs[int(user_input)]
             except:
                 pass
 
             print(swellCLI.RED + '\nTry again. Input must be an integer from 0-' + str(len(data_list)-1) + '\n' + swellCLI.ENDC)
 
+    def nicknameIsTaken(self, nickname):
+        for i, spot in enumerate(self.user_data['favorites']):
+            if nickname == spot['nickname']:
+                return True
+        return False
 
     def getCurrentString(self, data):
         #pprint.pprint(data)
