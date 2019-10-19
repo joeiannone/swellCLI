@@ -173,13 +173,16 @@ class swellCLI:
 
 
     def getCurrentString(self, data):
-        current = self.BOLD + self.OKYELLOW + data['location_title'] + self.ENDC + '\n'
+        #pprint.pprint(data)
+        current = '\n'
+        current += self.BOLD + self.OKYELLOW + data['location_title'] + self.ENDC + '\n'
         current += tabulate({
             'Air': [data['air'], data['wind']],
             'Height': [data['buoy_name'], data['wave_height']],
             'Tide': ['low: ' + data['low_tide'], 'high: ' + data['high_tide']],
             'Water': [data['water_temp'], data['wetsuit']]
         }, headers="keys", tablefmt="")
+        current += '\n'
         return current
 
 
