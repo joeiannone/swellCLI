@@ -39,8 +39,10 @@ _Other flags can be used in combination i.e. -fc, -cf._
 - Scraped from swellinfo.com
 
 ### Screenshots:
-![screenshot](img/screenshot2.png)
+![screenshot](img/screenshot1.png)
 
 ![screenshot](img/screenshot1.png)
 
 ![screenshot](img/screenshot3.png)
+
+![screenshot](img/screenshot4.png)
