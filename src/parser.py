@@ -11,6 +11,7 @@ class swellParser():
     def __init__(self, html):
         self.html = html
 
+
     def getCurrentConditions(self):
 
         # Parse current condition data into a dictionary
@@ -22,7 +23,7 @@ class swellParser():
         current = {}
         current['location_title'] = self.html.find('h1', {'class': 'fcst-loc-name-label'}).text.strip()
         current['air'] = self.html.find("div", {'class': 'wx-icon-temp'}).string.strip()
-        current['wind'] = self.html.find("div", {'class': 'surf-data-wind-data'}).string.strip()
+        current['wind'] = self.html.find("div", {'class': 'wx-icons-wind-desc'}).text.strip()
         current['buoy_name'] = current_buoy.find('div', {'class': 'wx-icon-buoy-name'}).string.strip()
         current['wave_height'] = current_buoy.find(attrs={'class': None}).string.strip()
         current['low_tide'] = current_tide[0].getText()[3:]

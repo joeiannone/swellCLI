@@ -24,7 +24,7 @@ try:
 except ImportError:
   print('\nDependencies not installed.')
   print('\nrun:\n\tpip install -r requirements.txt\n')
-  sys.exit(0)
+  sys.exit(1)
 
 
 def main():

@@ -16,15 +16,17 @@ class swellCLI:
 
     def __init__(self):
 
+        self.root_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
         # Make sure 'user_data' directory exists, if not create
-        self.user_directory = 'user_data'
+        self.user_directory = self.root_path + '/user_data'
         try:
             os.stat(self.user_directory)
         except:
             os.mkdir(self.user_directory)
 
         # Initialize data sets and swell client
-        self.swellFile = self.user_directory+'/swell.json'
+        self.swellFile = self.user_directory + '/swell.json'
         self.user_data = self.read_json(self.swellFile)
         self.init_data = {'favorites': []}
 
@@ -32,11 +34,9 @@ class swellCLI:
         self.swell = Client(self.request_handler)
 
         self.nicknameList = []
-
         self.flags = None
         self.arg = None
         self.nickname = None
-
         self.args = sys.argv
         self.args.pop(0) # Remove first arg (script) for simplicity
 
@@ -62,16 +62,18 @@ class swellCLI:
             elif self.arg is None and self.nickname is None:
                 self.arg = arg
 
+
         if self.flags == 'h':
             #help
             pass
 
         if self.arg is None:
-            self.selectAndOrDisplay()
+            self.selectAndDisplay()
         elif self.arg == 'add':
             self.addLocationRoutine()
         elif self.arg == 'spots':
-            pass
+            print(self.getSpotsNicknamesView())
+
         elif self.arg == 'help':
             #help
             pass
@@ -79,7 +81,10 @@ class swellCLI:
         sys.exit(0)
 
 
-    def selectAndOrDisplay(self):
+    def selectAndDisplay(self):
+
+        current = None
+        forecast = None
 
         if self.nickname is None:
             # - Allow user to select a location
@@ -97,8 +102,17 @@ class swellCLI:
         swell_soup = BeautifulSoup(swell_html, 'lxml')
         swell_parser = swellParser(swell_soup)
 
-        current = self.getCurrentString(swell_parser.getCurrentConditions())
-        print(current)
+        if self.flags is None or (self.flags is not None and 'c' in self.flags):
+            current = self.getCurrentView(swell_parser.getCurrentConditions())
+
+        if self.flags is not None and 'f' in self.flags:
+            forecast = self.getForecastView(swell_parser.getForecast())
+
+        if current is not None:
+            print(current)
+        if forecast is not None:
+            print(forecast)
+
 
 
     def getLocalLinkByNickname(self, nickname):
@@ -155,7 +169,7 @@ class swellCLI:
             refs = []
             for i, item in enumerate(data_list):
                 refs.append(item)
-                print(Colors.BOLD + '{0: <3}'.format(str(i)) + Colors.ENDC + \
+                print('  ' + Colors.BOLD + '{0: <3}'.format(str(i)) + Colors.ENDC + \
                     Colors.CYAN + ' --> ' + Colors.ENDC + ' ' + data_list[item]['label'])
 
             user_input = input('\nSelect a ' + selection_str + ' (' + Colors.BOLD + '0-' + str(len(data_list)-1) + Colors.ENDC + ')' + ': ')
@@ -177,23 +191,45 @@ class swellCLI:
         return False
 
 
-    def getCurrentString(self, data):
+    def getCurrentView(self, data):
         #pprint.pprint(data)
-        current = '\n'
-        current += Colors.BOLD + Colors.OKYELLOW + data['location_title'] + Colors.ENDC + '\n'
-        current += tabulate({
-            'Air': [data['air'], data['wind']],
-            'Height': [data['buoy_name'], data['wave_height']],
-            'Tide': ['low: ' + data['low_tide'], 'high: ' + data['high_tide']],
-            'Water': [data['water_temp'], data['wetsuit']]
-        }, headers="keys", tablefmt="")
-        current += '\n'
-        return current
+        col_pad = 4
+        table_pad = 2
+        location = data['location_title'].split(',')
+        city = location[0].title()
+        state = location[1].upper()
+        air = ['Air', data['air'], data['wind']]
+        swell = ['Swell', data['buoy_name'], data['wave_height']]
+        tide = ['Tide', str('low: ' + data['low_tide']), str('high: ' + data['high_tide'])]
+        water = ['Water', data['water_temp'], data['wetsuit']]
+        air_w = len(max(air, key=len)) + col_pad
+        swell_w = len(max(swell, key=len)) + col_pad
+        tide_w = len(max(tide, key=len)) + col_pad
+        water_w = len(max(water, key=len)) + col_pad
+        table_w = air_w + swell_w + tide_w + water_w + col_pad
+        view = '\n'
+        view += Colors.OKYELLOW + str('Current conditions for ' + Colors.BOLD + city + ',' + state).ljust(table_w) + Colors.ENDC + '\n\n'
+        view += ''.ljust(table_pad) + Colors.CYAN + Colors.BOLD + air[0].ljust(air_w) + swell[0].ljust(swell_w) + tide[0].ljust(tide_w) + water[0].ljust(water_w) + Colors.ENDC + '\n'
+        view += ''.ljust(table_pad) + air[1].ljust(air_w) + swell[1].ljust(swell_w) + tide[1].ljust(tide_w) + water[1].ljust(water_w) + '\n'
+        view += ''.ljust(table_pad) + air[2].ljust(air_w) + swell[2].ljust(swell_w) + tide[2].ljust(tide_w) + water[2].ljust(water_w) + '\n'
+        view += '\n'
+        return view
 
 
-    def getForecastString(self, data):
+    def getForecastView(self, data):
+        pprint.pprint(data)
         forecast = ''
         return forecast
+
+
+    def getSpotsNicknamesView(self):
+        view = '\n'
+        view += Colors.BOLD + 'Your Saved Spots' + Colors.ENDC + ':\n\n'
+        for i, fav in enumerate(self.user_data['favorites']):
+            view += '  ' + Colors.CYAN + Colors.BOLD + '{0: <20}'.format(fav['nickname']) + Colors.ENDC + ' (' + str(i) + ' - ' + fav['title'] + ')\n'
+        view += '\n'
+        view += 'Pass one of these nicknames or indexes as a command line argument to quickly retrieve the surf report.\n'
+        return view
 
 
     def write_json(self, filename, data):

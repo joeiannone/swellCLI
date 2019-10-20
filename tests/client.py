@@ -4,16 +4,19 @@
 # @Last modified by:   josephiannone
 # @Last modified time: 2019-01-25T22:26:24-05:00
 
-import sys
-import os.path
+
+import sys, os.path, random, json, pprint
 sys.path.insert(0, '..')
-import random
-import json
-import pprint
+
+# This is no longer a valid test
+
+sys.exit()
+
 from bs4 import BeautifulSoup
-from client import Client
-from request import RequestHandler
-from parser import swellParser
+from src.client import Client
+from src.request import RequestHandler
+from src.parser import swellParser
+
 
 request_handler = RequestHandler()
 client = Client(request_handler)
