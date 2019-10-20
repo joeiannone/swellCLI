@@ -291,12 +291,12 @@ class swellCLI:
             view += ''.ljust(table_pad) + am_str
             view += ''.ljust(table_pad) + pm_str
             view += '\n'
-            if len(day['conditions_long_text']) > 4:
-                for line in self.breakDownLongText(day['conditions_long_text'], table_w):
-                    view += ''.ljust(table_pad) + line + '\n'
-                view += '\n'
             if len(day['surf']) > 4:
                 for line in self.breakDownLongText(day['surf'], table_w):
+                    view += ''.ljust(table_pad) + line + '\n'
+                view += '\n'
+            if len(day['conditions_long_text']) > 4:
+                for line in self.breakDownLongText(day['conditions_long_text'], table_w):
                     view += ''.ljust(table_pad) + line + '\n'
                 view += '\n'
 
@@ -355,11 +355,27 @@ class swellCLI:
         view += ''.ljust(table_pad) + Colors.BOLD + "*" + Colors.ENDC + " Other flags can be used in combination i.e. -fc, -cf.\n\n"
         return view
 
+
     def breakDownLongText(self, text, chunk_size):
-        chunks = len(text)
-        if chunk_size == 0:
+        if len(text) == 0:
             return []
-        return [ text[i:i+chunk_size] for i in range(0, chunks, chunk_size) ]
+        elif len(text) <= chunk_size:
+            return [text]
+        s = text.split(' ')
+        line = ''
+        text_chunks = []
+        for  i, word in enumerate(s):
+            redo = True
+            while redo:
+                if (len(line) + len(word) + len(' ')) < chunk_size:
+                    line += str(word + ' ')
+                    redo = False
+                else:
+                    text_chunks.append(line)
+                    line = ''
+                if i == len(s)-1:
+                    text_chunks.append(line)
+        return text_chunks
 
 
     def write_json(self, filename, data):
