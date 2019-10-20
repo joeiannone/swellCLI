@@ -38,8 +38,9 @@ class swellParser():
         # Parse forecast data into a dictionary
 
         forecast_days = self.html.find_all('li', {'class': 'fcst-day'})
-
+        forecast_dict = {}
         forecast = []
+        forecast_dict['location_title'] = self.html.find('h1', {'class': 'fcst-loc-name-label'}).text.strip()
         for day in forecast_days:
             forecast_height_cond_am = day.find('div', {'class': 'fcst-day-am'})
             forecast_height_cond_pm = day.find('div', {'class': 'fcst-day-pm'})
@@ -86,4 +87,5 @@ class swellParser():
 
             forecast.append(day_dict)
 
-        return forecast
+        forecast_dict['forecast'] = forecast
+        return forecast_dict

@@ -4,8 +4,7 @@
 # @Last modified by:   josephiannone
 # @Last modified time: 2019-05-14T20:28:21-04:00
 
-import json, os, sys, pprint
-from tabulate import tabulate
+import json, os, sys, pprint, calendar, datetime
 from bs4 import BeautifulSoup
 from src.client import Client
 from src.request import RequestHandler
@@ -15,6 +14,10 @@ from src.colors import Colors
 class swellCLI:
 
     def __init__(self):
+
+        # get current day of week name
+        today = datetime.date.today()
+        self.today_name = calendar.day_name[today.weekday()].upper()
 
         self.root_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -57,26 +60,38 @@ class swellCLI:
         for arg in self.args:
             if arg in self.nicknameList:
                 self.nickname = arg
+            elif arg.isdigit() and int(arg) < len(self.nicknameList):
+                self.nickname = self.nicknameList[int(arg)] # use index for nickname
             if arg[0] is '-' and self.flags is None:
                 self.flags = arg.replace('-', '')
             elif self.arg is None and self.nickname is None:
                 self.arg = arg
 
-
-        if self.flags == 'h':
-            #help
-            pass
+        # if 'h' help flag set strictly alone
+        if self.flags == 'h' or self.flags == 'help':
+            exit(self.getHelpView())
 
         if self.arg is None:
             self.selectAndDisplay()
-        elif self.arg == 'add':
+        if self.arg == 'add':
             self.addLocationRoutine()
-        elif self.arg == 'spots':
+        if self.arg == 'spots':
             print(self.getSpotsNicknamesView())
-
-        elif self.arg == 'help':
-            #help
-            pass
+        if self.arg == 'help':
+            print(self.getHelpView())
+        if self.arg == 'remove':
+            if self.nickname is not None:
+                if self.removeFavoriteByNickname(self.nickname):
+                    print('\n  ' + Colors.BOLD + self.nickname + ' has been removed.\n' + Colors.ENDC)
+                else:
+                    print(Colors.BOLD + '\n  Could not remove ' + self.nickname + ' from data store.\n' + Colors.ENDC)
+            else:
+                print('\n! Invalid nickname. Try again.\n')
+        if self.arg == 'reset':
+            if self.resetUserData():
+                print('\n  ' + Colors.BOLD + 'Data has been reset.\n' + Colors.ENDC)
+            else:
+                print(Colors.BOLD + '\n  Could not reset data.\n' + Colors.ENDC)
 
         sys.exit(0)
 
@@ -95,7 +110,7 @@ class swellCLI:
             local_areas = json.loads(self.swell.getLocalAreas(sub_area))
             local_area = self.getLocationInput(local_areas, 'local area')
         else:
-            local_area = self.getLocalLinkByNickname(self, self.nickname)
+            local_area = self.getLocalLinkByNickname(self.nickname)
 
         # - Display current conditions and forecast
         swell_html = self.swell.getSwellHTML(local_area)
@@ -103,6 +118,8 @@ class swellCLI:
         swell_parser = swellParser(swell_soup)
 
         if self.flags is None or (self.flags is not None and 'c' in self.flags):
+            current = self.getCurrentView(swell_parser.getCurrentConditions())
+        elif self.flags is not None and ('c' not in self.flags and 'f' not in self.flags):
             current = self.getCurrentView(swell_parser.getCurrentConditions())
 
         if self.flags is not None and 'f' in self.flags:
@@ -113,6 +130,24 @@ class swellCLI:
         if forecast is not None:
             print(forecast)
 
+
+    def resetUserData(self):
+        if not self.write_json(self.swellFile, self.init_data):
+            return False
+        return True
+
+
+    def removeFavoriteByNickname(self, nickname):
+        if not self.nicknameIsTaken(nickname):
+            return False
+        for i, fav in enumerate(self.user_data['favorites']):
+            if fav['nickname'] == nickname:
+                if not self.user_data['favorites'].pop(i):
+                    return False
+                if not self.write_json(self.swellFile, self.user_data):
+                    return False
+                return True
+        return False
 
 
     def getLocalLinkByNickname(self, nickname):
@@ -138,7 +173,7 @@ class swellCLI:
             self.user_data['favorites'][-1]['nickname'] = nickname
 
             if (self.write_json(self.swellFile, self.user_data)):
-                print(Colors.BOLD + '\nSpot added.' + Colors.ENDC)
+                print(Colors.BOLD + '\nSpot added!' + Colors.ENDC)
 
         except Exception as e:
             print(e)
@@ -152,14 +187,14 @@ class swellCLI:
 
 
     def getNicknameRoutine(self, spot):
-        print('Add a nickname for this spot. (no spaces, limit 20 characters)')
+        print(Colors.UNDERLINE + 'Add a nickname for this spot. (no spaces, limit 20 characters)\n' + Colors.ENDC)
         while 1:
-            user_input = input('Nickname for ' + spot['title'] + ': ')
+            user_input = input(Colors.BOLD + 'Nickname for ' + spot['title'] + Colors.ENDC + ': ')
             if len(user_input) > 20 or ' ' in user_input:
-                print('\nInvalid nickname. Try again.\n')
+                print('\n! Invalid nickname. Try again.\n')
                 continue
             if self.nicknameIsTaken(user_input):
-                print('\nThat nickname is already taken. Try again\n')
+                print('\n! That nickname already exists. Try again\n')
                 continue
             return user_input
 
@@ -192,7 +227,6 @@ class swellCLI:
 
 
     def getCurrentView(self, data):
-        #pprint.pprint(data)
         col_pad = 4
         table_pad = 2
         location = data['location_title'].split(',')
@@ -217,19 +251,115 @@ class swellCLI:
 
 
     def getForecastView(self, data):
-        pprint.pprint(data)
-        forecast = ''
-        return forecast
+        table_pad = 2
+        col_w = 32
+        table_w = col_w*2
+        location = data['location_title'].split(',')
+        city = location[0].title()
+        state = location[1].upper()
+        forecast_days = data['forecast']
+        view = '\n'
+        view += Colors.OKYELLOW + 'Long range forecast for ' + Colors.BOLD + city + ',' + state + Colors.ENDC + '\n\n'
+
+        for i, day in enumerate(forecast_days):
+
+            day_str = Colors.BOLD + day['day_of_week'] + Colors.ENDC
+            if day['day_of_week'] == self.today_name:
+                day_str += ' (TODAY)'
+
+            am_color = Colors.WHITE
+            pm_color = Colors.WHITE
+            if 'FAIR' in day['am_conditions']:
+                am_color = Colors.OKBLUE
+            elif 'CHOPPY' in day['am_conditions']:
+                am_color = Colors.RED
+            elif 'CLEAN' in day['am_conditions']:
+                am_color = Colors.OKGREEN
+            if 'FAIR' in day['pm_conditions']:
+                pm_color = Colors.OKBLUE
+            elif 'CHOPPY' in day['pm_conditions']:
+                pm_color = Colors.RED
+            elif 'CLEAN' in day['pm_conditions']:
+                pm_color = Colors.OKGREEN
+
+            #print(self.breakDownLongText(day['conditions_long_text'], table_w))
+
+            am_str = str(am_color + 'AM: ' +  day['am_height'] + Colors.ENDC).ljust(col_w)
+            pm_str = str(pm_color + 'AM: ' +  day['pm_height'] + Colors.ENDC).ljust(col_w)
+
+            view += ''.ljust(table_pad) + day_str + '\n'
+            view += ''.ljust(table_pad) + am_str
+            view += ''.ljust(table_pad) + pm_str
+            view += '\n'
+            if len(day['conditions_long_text']) > 4:
+                for line in self.breakDownLongText(day['conditions_long_text'], table_w):
+                    view += ''.ljust(table_pad) + line + '\n'
+                view += '\n'
+            if len(day['surf']) > 4:
+                for line in self.breakDownLongText(day['surf'], table_w):
+                    view += ''.ljust(table_pad) + line + '\n'
+                view += '\n'
+
+            view += '\n'
+        return view
 
 
     def getSpotsNicknamesView(self):
         view = '\n'
         view += Colors.BOLD + 'Your Saved Spots' + Colors.ENDC + ':\n\n'
+
+        no_spots = False
+        try:
+            if len(self.user_data['favorites']) == 0:
+                no_spots = True
+        except IndexError:
+            no_spots = True
+
+        if no_spots:
+            view += '    -- None available --\n\n'
+            return view
+
         for i, fav in enumerate(self.user_data['favorites']):
             view += '  ' + Colors.CYAN + Colors.BOLD + '{0: <20}'.format(fav['nickname']) + Colors.ENDC + ' (' + str(i) + ' - ' + fav['title'] + ')\n'
         view += '\n'
-        view += 'Pass one of these nicknames or indexes as a command line argument to quickly retrieve the surf report.\n'
+        view += '  * Use these nicknames or indexes as a command line argument to quickly retrieve the surf report.\n'
         return view
+
+
+    def getHelpView(self):
+        table_pad = 2
+        col_pad = 20
+        view = '\n'
+        view += Colors.BOLD + 'MANUAL:' + Colors.ENDC + '\n\n'
+        view += ''.ljust(table_pad) + Colors.UNDERLINE + Colors.OKYELLOW + 'COMMANDS:' + Colors.ENDC + '\n'
+        view += ''.ljust(table_pad) + Colors.BOLD + '[no argument]'.ljust(col_pad) + Colors.ENDC + \
+            '- Prompts user to select a location and by default will display \n' + ''.ljust(col_pad+4) + 'the current conditions (unless other flags are specified).\n'
+        view += ''.ljust(table_pad) + Colors.BOLD + '[nickname]'.ljust(col_pad) + Colors.ENDC + \
+            '- Will display either the current conditions, forecast, or both \n' + ''.ljust(col_pad+4) + '(depending on specified flags) for the given nickname.\n'
+        view += ''.ljust(table_pad) + Colors.BOLD + 'spots'.ljust(col_pad) + Colors.ENDC + \
+            '- Displays users saved spots by nickname.\n'
+        view += ''.ljust(table_pad) + Colors.BOLD + 'add'.ljust(col_pad) + Colors.ENDC + \
+            '- Prompts user to add/save a new spot to user data store.\n'
+        view += ''.ljust(table_pad) + Colors.BOLD + 'remove [nickname]'.ljust(col_pad) + Colors.ENDC + \
+            '- Removes saved spot from user data store if [nickname] is a \n' + ''.ljust(col_pad+4) + 'valid nickname or spot index.\n'
+        view += ''.ljust(table_pad) + Colors.BOLD + 'reset'.ljust(col_pad) + Colors.ENDC + \
+            '- Resets user data store to original state.\n\n'
+        view += ''.ljust(table_pad) + Colors.UNDERLINE + Colors.OKYELLOW + 'FLAGS:' + Colors.ENDC + '\n'
+        view += ''.ljust(table_pad) + Colors.BOLD + '-c'.ljust(col_pad) + Colors.ENDC + \
+            '- Current conditions\n'
+        view += ''.ljust(table_pad) + Colors.BOLD + '-f'.ljust(col_pad) + Colors.ENDC + \
+            '- Forecast\n'
+        view += ''.ljust(table_pad) + Colors.BOLD + '-h, --help'.ljust(col_pad) + Colors.ENDC + '- Displays manual\n'
+        view += '\n'
+        view += ''.ljust(table_pad) + Colors.BOLD + "*" + Colors.ENDC + " '-h' and '--help' are only interpreted if used exclusively.\n"
+        view += ''.ljust(table_pad) + Colors.BOLD + "*" + Colors.ENDC + " Other flags can be used in combination i.e. -fc, -cf.\n\n"
+        return view
+
+    def breakDownLongText(self, text, chunk_size):
+        chunks = len(text)
+        if chunk_size == 0:
+            return []
+        return [ text[i:i+chunk_size] for i in range(0, chunks, chunk_size) ]
 
 
     def write_json(self, filename, data):
