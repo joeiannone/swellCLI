@@ -15,8 +15,8 @@ def main():
     # Python version check and warning
     pyv = sys.version_info
     pyv_str = str(pyv[0]) + '.' + str(pyv[1])
-    if float(pyv_str) < 3.6:
-        print('\nERROR: You must use python version 3.6 or higher.')
+    if float(pyv_str) < 3.0:
+        print('\nERROR: You must use python version 3 or higher.')
         print('This is version ' + pyv_str + '\n')
         sys.exit(1)
 

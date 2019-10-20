@@ -265,7 +265,7 @@ class swellCLI:
 
             day_str = Colors.BOLD + day['day_of_week'] + Colors.ENDC
             if day['day_of_week'] == self.today_name:
-                day_str += ' (TODAY)'
+                day_str += ' (' + Colors.OKYELLOW + 'TODAY' + Colors.ENDC + ')'
 
             am_color = Colors.WHITE
             pm_color = Colors.WHITE
@@ -291,14 +291,15 @@ class swellCLI:
             view += ''.ljust(table_pad) + am_str
             view += ''.ljust(table_pad) + pm_str
             view += '\n'
-            if len(day['surf']) > 4:
-                for line in self.breakDownLongText(day['surf'], table_w):
-                    view += ''.ljust(table_pad) + line + '\n'
-                view += '\n'
             if len(day['conditions_long_text']) > 4:
                 for line in self.breakDownLongText(day['conditions_long_text'], table_w):
                     view += ''.ljust(table_pad) + line + '\n'
                 view += '\n'
+            if len(day['surf']) > 4:
+                for line in self.breakDownLongText(day['surf'], table_w):
+                    view += ''.ljust(table_pad) + line + '\n'
+                view += '\n'
+
 
             view += '\n'
         return view
