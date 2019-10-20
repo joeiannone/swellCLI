@@ -30,8 +30,8 @@ $ python main.py [args]
 -  **-f**                    -- Forecast
 -  **-h**, **--help**        -- Displays manual
 
-\*l_'-h' and '--help' are only interpreted if used exclusively._
-\*l_Other flags can be used in combination i.e. -fc, -cf._
+\* _'-h' and '--help' are only interpreted if used exclusively._
+\* _Other flags can be used in combination i.e. -fc, -cf._
 
 
 ### Data:
