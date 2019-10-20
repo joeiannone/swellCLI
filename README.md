@@ -6,7 +6,7 @@
 - python 3.0+
 
 ### Setup:
-(* ***virtualenv*** is recommended*)
+(_***virtualenv*** is recommended_)
 ```
 $ virtualenv -p python3 venv
 $ source venv/bin/activate
@@ -18,20 +18,20 @@ $ python main.py [args]
 ```
 
 ### COMMANDS:
--  [no argument]       -- Prompts user to select a location and by default will display the current conditions (unless other flags are specified).
--  [nickname]          -- Will display either the current conditions, forecast, or both (depending on specified flags) for the given nickname.
--  spots               -- Displays users saved spots by nickname.
--  add                 -- Prompts user to add/save a new spot to user data store.
--  remove [nickname]   -- Removes saved spot from user data store if [nickname] is a valid nickname or spot index.
--  reset               -- Resets user data store to original state.
+-  ***[no argument]***        -- Prompts user to select a location and by default will display the current conditions (unless other flags are specified).
+-  ***[nickname]***           -- Will display either the current conditions, forecast, or both (depending on specified flags) for the given nickname.
+-  ***spots***                -- Displays users saved spots by nickname.
+-  ***add***                  -- Prompts user to add/save a new spot to user data store.
+-  ***remove [nickname]***    -- Removes saved spot from user data store if it is a valid nickname or spot index.
+-  ***reset***                -- Resets user data store to original state.
 
 ### FLAGS:
--  -c                  -- Current conditions
--  -f                  -- Forecast
--  -h, --help          -- Displays manual
+-  -c                         -- Current conditions
+-  -f                         -- Forecast
+-  -h, --help                 -- Displays manual
 
-  * '-h' and '--help' are only interpreted if used exclusively.
-  * Other flags can be used in combination i.e. -fc, -cf.
+* _'-h' and '--help' are only interpreted if used exclusively._
+* _Other flags can be used in combination i.e. -fc, -cf._
 
 
 ### Data:
