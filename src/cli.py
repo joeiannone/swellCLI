@@ -21,8 +21,8 @@ class swellCLI:
 
         self.root_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-        # Make sure 'user_data' directory exists, if not create
-        self.user_directory = self.root_path + '/user_data'
+        # Make sure '.swell_user_data' directory exists, if not create
+        self.user_directory = str(os.getenv("HOME")) + "/.swell_user_data"
         try:
             os.stat(self.user_directory)
         except:

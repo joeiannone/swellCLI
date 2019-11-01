@@ -1,7 +1,9 @@
 /venv/
 *.pyc
+swell.json
 __pycache__/
 .DS_Store
 /user_data/
+/.swell_user_data/
 /build/
 /dist/

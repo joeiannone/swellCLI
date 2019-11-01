@@ -3,8 +3,7 @@
 # TODO:
 # Needs Testing!!!!!!!!!!
 
-import os
-import sys
+import os, sys
 
 try:
     os.system('pip install -r requirements.txt')
