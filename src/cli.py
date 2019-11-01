@@ -69,7 +69,7 @@ class swellCLI:
 
         # if 'h' help flag set strictly alone
         if self.flags == 'h' or self.flags == 'help':
-            exit(self.getHelpView())
+            sys.exit(self.getHelpView())
 
         if self.arg is None:
             self.selectAndDisplay()
