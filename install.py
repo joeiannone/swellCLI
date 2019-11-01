@@ -1,6 +1,19 @@
+#!/usr/bin/env python
+
 # TODO:
+# Needs Testing!!!!!!!!!!
 
-# pyinstaller --onefile main.py
-# find bundled executable at dist/main
+import os
+import sys
 
-# cp dist/main to usr/bin/local/swell to install
+try:
+    os.system('pip install -r requirements.txt')
+    os.system('pyinstaller --onefile main.py')
+    os.system('cp ./dist/main /usr/local/bin/swell')
+    os.system('rm -r build')
+    os.system('rm -r dist')
+except Exception as e:
+    sys.exit("\nSomething went wrong with install: " + str(e) + "\n")
+
+
+sys.exit("\n\nSuccess.\n\nUse the command 'swell' to run.\n\n")
