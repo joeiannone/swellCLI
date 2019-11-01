@@ -38,8 +38,7 @@ def main():
 
 # handler for SIGINT
 def signal_int_handler(sig, frame):
-    print('\n\nGoodbye.\n')
-    sys.exit(0)
+    sys.exit('\n\nGoodbye.\n')
 
 
 
