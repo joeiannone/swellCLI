@@ -88,6 +88,8 @@ class swellCLI:
             else:
                 print('\n! Invalid nickname. Try again.\n')
         if self.arg == 'reset':
+            if not self.userActionConfirmation('reset data stores'):
+                sys.exit()
             if self.resetUserData():
                 print('\n  ' + Colors.BOLD + 'Data has been reset.\n' + Colors.ENDC)
             else:
@@ -217,6 +219,14 @@ class swellCLI:
                 pass
 
             print(Colors.RED + '\nTry again. Input must be an integer from 0-' + str(len(data_list)-1) + '\n' + Colors.ENDC)
+
+
+    def userActionConfirmation(self, action_text):
+        user_input = input('\nAre you sure you want to ' + action_text + '? (Y/n): ')
+        if user_input is 'Y':
+            return True
+        else:
+            return False
 
 
     def nicknameIsTaken(self, nickname):
