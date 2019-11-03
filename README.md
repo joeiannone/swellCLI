@@ -9,13 +9,13 @@
 ---
 
 ### Install:
-##### **With** virtualenv (_recommended_)
+**With** virtualenv (_recommended_)
 ```
 $ virtualenv -p python3 venv
 $ source venv/bin/activate
 (venv) $ ./install.py
 ```
-##### **Without** virtualenv
+**Without** virtualenv
 ```
 $ python3 install.py
 ```
