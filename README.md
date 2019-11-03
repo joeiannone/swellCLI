@@ -6,22 +6,28 @@
 - python3
 - pip
 
+---
+
 ### Install:
 ##### **With** virtualenv (_recommended_)
-* ```
+```
 $ virtualenv -p python3 venv
 $ source venv/bin/activate
 (venv) $ ./install.py
 ```
 ##### **Without** virtualenv
-* ```
+```
 $ python3 install.py
 ```
+
+---
 
 ### Usage:
 ```
 $ swell [args]
 ```
+
+---
 
 ### COMMANDS:
 -  **[no argument]**        -- Prompts user to select a location and by default will display the current conditions (unless other flags are specified).
@@ -40,9 +46,12 @@ $ swell [args]
 _'-h' and '--help' are only interpreted if used exclusively._
 _Other flags can be used in combination i.e. -fc, -cf._
 
+---
 
 ### Data:
 - Scraped from swellinfo.com
+
+---
 
 ### Screenshots:
 ![screenshot](img/screenshot5.png)
