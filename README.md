@@ -3,18 +3,20 @@
 ## A command line interface for checking the surf!
 
 ### Requires:
-- python 3.0+
+- python3
+- pip
 
-### Setup:
+### Install:
 (_***virtualenv*** is recommended_)
 ```
 $ virtualenv -p python3 venv
 $ source venv/bin/activate
-$ pip install -r requirements.txt
+(venv) $ ./install.py
 ```
-### Run with:
+
+### Usage:
 ```
-$ python main.py [args]
+$ swell [args]
 ```
 
 ### COMMANDS:
