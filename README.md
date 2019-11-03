@@ -8,7 +8,7 @@
 
 ---
 
-### Install:
+### Install (macOS):
 **With** virtualenv (_recommended_)
 ```
 $ virtualenv -p python3 venv
@@ -25,6 +25,10 @@ $ python3 install.py
 ### Usage:
 ```
 $ swell [args]
+```
+or
+```
+:~/swellCLI $ python3 main.py [args]
 ```
 
 ---
