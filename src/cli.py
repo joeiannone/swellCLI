@@ -73,20 +73,27 @@ class swellCLI:
 
         if self.arg is None:
             self.selectAndDisplay()
+
         if self.arg == 'add':
             self.addLocationRoutine()
+
         if self.arg == 'spots':
             print(self.getSpotsNicknamesView())
+
         if self.arg == 'help':
             print(self.getHelpView())
+
         if self.arg == 'remove':
             if self.nickname is not None:
+                if not self.userActionConfirmation("remove {nickname} from saved spots".format(nickname=self.nickname)):
+                    sys.exit()
                 if self.removeFavoriteByNickname(self.nickname):
                     print('\n  ' + Colors.BOLD + self.nickname + ' has been removed.\n' + Colors.ENDC)
                 else:
                     print(Colors.BOLD + '\n  Could not remove ' + self.nickname + ' from data store.\n' + Colors.ENDC)
             else:
                 print('\n! Invalid nickname. Try again.\n')
+
         if self.arg == 'reset':
             if not self.userActionConfirmation('reset data stores'):
                 sys.exit()
@@ -222,7 +229,7 @@ class swellCLI:
 
 
     def userActionConfirmation(self, action_text):
-        user_input = input('\nAre you sure you want to ' + action_text + '? (Y/n): ')
+        user_input = input('\n{bold}Are you sure you want to {action}? (Y/n){bold_end}: '.format(action=action_text, bold=Colors.BOLD, bold_end=Colors.ENDC))
         if user_input is 'Y':
             return True
         else:
