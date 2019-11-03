@@ -7,11 +7,15 @@
 - pip
 
 ### Install:
-(_***virtualenv*** is recommended_)
+##### With virtualenv (_***virtualenv*** is recommended_)
 ```
 $ virtualenv -p python3 venv
 $ source venv/bin/activate
 (venv) $ ./install.py
+```
+##### Without virtualenv
+```
+$ python3 install.py
 ```
 
 ### Usage:
