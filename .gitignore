@@ -7,3 +7,4 @@ __pycache__/
 /.swell_user_data/
 /build/
 /dist/
+main.spec

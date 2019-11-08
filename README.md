@@ -11,13 +11,13 @@
 ### Install (macOS):
 **With** virtualenv (_recommended_)
 ```
-$ virtualenv -p python3 venv
-$ source venv/bin/activate
-(venv) $ ./install.py
+:~/swellCLI $ virtualenv -p python3 venv
+:~/swellCLI $ source venv/bin/activate
+(venv) :~/swellCLI $ ./install.py
 ```
 **Without** virtualenv
 ```
-$ python3 install.py
+:~/swellCLI $ python3 install.py
 ```
 
 ---
