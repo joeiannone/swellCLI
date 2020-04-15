@@ -4,9 +4,12 @@
 # @Last modified by:   josephiannone
 # @Last modified time: 2019-01-25T22:21:02-05:00
 
+
 from requests import get
 from requests.exceptions import RequestException
 from contextlib import closing
+from yaspin import yaspin, Spinner
+from src.spinners import Spinners
 
 class RequestHandler():
 
@@ -14,15 +17,28 @@ class RequestHandler():
 
     def http_get(self, url):
         # http 'GET'
+
+        # set spinner
+        if url.find('surf-forecast') is not -1:
+            self.loader = yaspin(Spinner(Spinners.shark, 100)).white.bold.on_blue
+        else:
+            self.loader = yaspin(Spinner(Spinners.earth, 180))
+
+        # start loader to anticipate a possible slow request
+        self.loader.start()
+
         try:
             with closing(get(url, stream=True)) as resp:
                 if self.is_good_response(resp):
+                    self.loader.stop() # stop loader
                     return resp.content
                 else:
+                    self.loader.stop() # stop loader
                     return None
 
         except RequestException as e:
             self.log_error('Error during requests to {0} : {1}'.format(url, str(e)))
+            self.loader.stop() # stop loader
             return None
 
 

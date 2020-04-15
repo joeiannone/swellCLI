@@ -44,6 +44,7 @@ class swellCLI:
         self.args.pop(0) # Remove first arg (script) for simplicity
 
 
+
     def run(self):
 
         # If user data empty initialize swellFile using init_data
@@ -119,6 +120,7 @@ class swellCLI:
             local_areas = json.loads(self.swell.getLocalAreas(sub_area))
             local_area = self.getLocationInput(local_areas, 'local area')
         else:
+            print('')
             local_area = self.getLocalLinkByNickname(self.nickname)
 
         # - Display current conditions and forecast
@@ -281,8 +283,9 @@ class swellCLI:
         for i, day in enumerate(forecast_days):
 
             day_str = Colors.BOLD + day['day_of_week'] + Colors.ENDC
-            if day['day_of_week'] == self.today_name:
-                day_str += ' (' + Colors.OKYELLOW + 'TODAY' + Colors.ENDC + ')'
+            # this seems to no longer be needed
+            #if day['day_of_week'] == self.today_name:
+            #    day_str += ' (' + Colors.OKYELLOW + 'TODAY' + Colors.ENDC + ')'
 
             am_color = Colors.WHITE
             pm_color = Colors.WHITE

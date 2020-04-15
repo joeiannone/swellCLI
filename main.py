@@ -8,9 +8,13 @@
 
 
 import sys, signal
-
+from yaspin import yaspin
 
 def main():
+
+    # spinner before dependency / version check
+    spinner = yaspin()
+    spinner.start()
 
     # Python version check and warning
     pyv = sys.version_info
@@ -18,6 +22,7 @@ def main():
     if float(pyv_str) < 3.0:
         print('\nERROR: You must use python version 3 or higher.')
         print('This is version ' + pyv_str + '\n')
+        spinner.stop()
         sys.exit(1)
 
     # Check dependencies
@@ -26,10 +31,14 @@ def main():
     except ImportError:
       print('\nDependencies not installed.')
       print('\nrun:\n\tpip install -r requirements.txt\n')
+      spinner.stop()
       sys.exit(1)
 
     # listener to catch SIGINT and exit gracefully
     signal.signal(signal.SIGINT, signal_int_handler)
+
+    # stop spinner now
+    spinner.stop()
 
     cli = swellCLI()
     cli.run()

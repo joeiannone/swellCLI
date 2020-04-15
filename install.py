@@ -11,6 +11,7 @@ try:
     os.system('cp ./dist/main /usr/local/bin/swell')
     os.system('rm -r build')
     os.system('rm -r dist')
+
 except Exception as e:
     sys.exit("\nSomething went wrong with install: " + str(e) + "\n")
 
