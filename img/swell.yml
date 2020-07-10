@@ -1,0 +1,579 @@
+# The configurations that used for the recording, feel free to edit them
+config:
+
+  # Specify a command to be executed
+  # like `/bin/bash -l`, `ls`, or any other commands
+  # the default is bash for Linux
+  # or powershell.exe for Windows
+  command: bash -l
+  
+  # Specify the current working directory path
+  # the default is the current working directory path
+  cwd: /Users/josephiannone/Dev/swellCLI/img
+  
+  # Export additional ENV variables
+  env:
+    recording: true
+  
+  # Explicitly set the number of columns
+  # or use `auto` to take the current
+  # number of columns of your shell
+  cols: 86
+  
+  # Explicitly set the number of rows
+  # or use `auto` to take the current
+  # number of rows of your shell
+  rows: 17
+  
+  # Amount of times to repeat GIF
+  # If value is -1, play once
+  # If value is 0, loop indefinitely
+  # If value is a positive number, loop n times
+  repeat: 0
+  
+  # Quality
+  # 1 - 100
+  quality: 100
+  
+  # Delay between frames in ms
+  # If the value is `auto` use the actual recording delays
+  frameDelay: auto
+  
+  # Maximum delay between frames in ms
+  # Ignored if the `frameDelay` isn't set to `auto`
+  # Set to `auto` to prevent limiting the max idle time
+  maxIdleTime: 2000
+  
+  # The surrounding frame box
+  # The `type` can be null, window, floating, or solid`
+  # To hide the title use the value null
+  # Don't forget to add a backgroundColor style with a null as type
+  frameBox:
+    type: floating
+    title: Terminalizer
+    style:
+      border: 0px black solid
+      # boxShadow: none
+      # margin: 0px
+  
+  # Add a watermark image to the rendered gif
+  # You need to specify an absolute path for
+  # the image on your machine or a URL, and you can also
+  # add your own CSS styles
+  watermark:
+    imagePath: null
+    style:
+      position: absolute
+      right: 15px
+      bottom: 15px
+      width: 100px
+      opacity: 0.9
+  
+  # Cursor style can be one of
+  # `block`, `underline`, or `bar`
+  cursorStyle: block
+  
+  # Font family
+  # You can use any font that is installed on your machine
+  # in CSS-like syntax
+  fontFamily: "Monaco, Lucida Console, Ubuntu Mono, Monospace"
+  
+  # The size of the font
+  fontSize: 12
+  
+  # The height of lines
+  lineHeight: 1
+  
+  # The spacing between letters
+  letterSpacing: 0
+  
+  # Theme
+  theme:
+    background: "transparent"
+    foreground: "#afafaf"
+    cursor: "#c7c7c7"
+    black: "#232628"
+    red: "#fc4384"
+    green: "#b3e33b"
+    yellow: "#ffa727"
+    blue: "#75dff2"
+    magenta: "#ae89fe"
+    cyan: "#708387"
+    white: "#d5d5d0"
+    brightBlack: "#626566"
+    brightRed: "#ff7fac"
+    brightGreen: "#c8ed71"
+    brightYellow: "#ebdf86"
+    brightBlue: "#75dff2"
+    brightMagenta: "#ae89fe"
+    brightCyan: "#b1c6ca"
+    brightWhite: "#f9f9f4"
+  
+# Records, feel free to edit them
+records:
+  - delay: 474
+    content: "\r\nThe default interactive shell is now zsh.\r\nTo update your account to use zsh, please run `chsh -s /bin/zsh`.\r\nFor more details, please visit https://support.apple.com/kb/HT208050.\r\n\e[?1034hJosephs-MacBook-Pro:img josephiannone$ "
+  - delay: 1312
+    content: s
+  - delay: 146
+    content: w
+  - delay: 79
+    content: e
+  - delay: 203
+    content: l
+  - delay: 150
+    content: l
+  - delay: 817
+    content: "\r\n"
+  - delay: 758
+    content: "\e[?25l\r⠋\e[0m \e[K"
+  - delay: 118
+    content: "\r⠙\e[0m \e[K"
+  - delay: 90
+    content: "\r⠹\e[0m \e[K"
+  - delay: 108
+    content: "\r⠸\e[0m \e[K"
+  - delay: 93
+    content: "\r⠼\e[0m \e[K"
+  - delay: 128
+    content: "\r⠴\e[0m \e[K"
+  - delay: 103
+    content: "\r⠦\e[0m \e[K"
+  - delay: 174
+    content: "\r⠧\e[0m \e[K"
+  - delay: 109
+    content: "\r⠇\e[0m \e[K"
+  - delay: 113
+    content: "\r⠏\e[0m \e[K"
+  - delay: 81
+    content: "\r\e[K\e[?25h\e[4m\r\nFollow the prompts below:\r\n\e[0m\r\n  \e[1m0  \e[0m\e[36m --> \e[0m United States\r\n  \e[1m1  \e[0m\e[36m --> \e[0m Mexico\r\n  \e[1m2  \e[0m\e[36m --> \e[0m Central America\r\n  \e[1m3  \e[0m\e[36m --> \e[0m Caribbean\r\n\r\nSelect a region (\e[1m0-3\e[0m): "
+  - delay: 809
+    content: '0'
+  - delay: 204
+    content: "\r\nSelected \e[1mUnited States\e[0m\r\n\r\n\e[?25l\r\U0001F30D \e[0m \e[K"
+  - delay: 184
+    content: "\r\U0001F30E \e[0m \e[K"
+  - delay: 185
+    content: "\r\e[K\e[?25h  \e[1m0  \e[0m\e[36m --> \e[0m North East\r\n  \e[1m1  \e[0m\e[36m --> \e[0m Mid-Atlantic\r\n  \e[1m2  \e[0m\e[36m --> \e[0m South East\r\n  \e[1m3  \e[0m\e[36m --> \e[0m East Florida\r\n  \e[1m4  \e[0m\e[36m --> \e[0m West Florida\r\n  \e[1m5  \e[0m\e[36m --> \e[0m Texas\r\n  \e[1m6  \e[0m\e[36m --> \e[0m North West\r\n  \e[1m7  \e[0m\e[36m --> \e[0m California North\r\n  \e[1m8  \e[0m\e[36m --> \e[0m Southern California\r\n  \e[1m9  \e[0m\e[36m --> \e[0m Hawaii\r\n\r\nSelect a sub area (\e[1m0-9\e[0m): "
+  - delay: 967
+    content: '1'
+  - delay: 313
+    content: "\r\nSelected \e[1mMid-Atlantic\e[0m\r\n\r\n\e[?25l\r\U0001F30D \e[0m \e[K"
+  - delay: 182
+    content: "\r\U0001F30E \e[0m \e[K"
+  - delay: 181
+    content: "\r\e[K\e[?25h  \e[1m0  \e[0m\e[36m --> \e[0m Monmouth County\r\n  \e[1m1  \e[0m\e[36m --> \e[0m Seaside Heights\r\n  \e[1m2  \e[0m\e[36m --> \e[0m Long Beach Island\r\n  \e[1m3  \e[0m\e[36m --> \e[0m Atlantic City\r\n  \e[1m4  \e[0m\e[36m --> \e[0m Ocean City\r\n  \e[1m5  \e[0m\e[36m --> \e[0m Cape May\r\n  \e[1m6  \e[0m\e[36m --> \e[0m Southern Delaware\r\n  \e[1m7  \e[0m\e[36m --> \e[0m Ocean City\r\n  \e[1m8  \e[0m\e[36m --> \e[0m Chincoteague\r\n  \e[1m9  \e[0m\e[36m --> \e[0m Eastern Shore\r\n  \e[1m10 \e[0m\e[36m --> \e[0m Virginia Beach\r\n  \e[1m11 \e[0m\e[36m --> \e[0m Corolla\r\n  \e[1m12 \e[0m\e[36m --> \e[0m Nags Head\r\n  \e[1m13 \e[0m\e[36m --> \e[0m Rodanthe\r\n  \e[1m14 \e[0m\e[36m --> \e[0m Buxton\r\n  \e[1m15 \e[0m\e[36m --> \e[0m Frisco\r\n\r\nSelect a local area (\e[1m0-15\e[0m): "
+  - delay: 3164
+    content: '3'
+  - delay: 146
+    content: "\r\nSelected \e[1mAtlantic City\e[0m\r\n\r\n\e[?25l\r\e[1m\e[44m\e[37m▐|\\____________▌\e[0m \e[K"
+  - delay: 100
+    content: "\r\e[1m\e[44m\e[37m▐_|\\___________▌\e[0m \e[K"
+  - delay: 101
+    content: "\r\e[1m\e[44m\e[37m▐__|\\__________▌\e[0m \e[K"
+  - delay: 101
+    content: "\r\e[1m\e[44m\e[37m▐___|\\_________▌\e[0m \e[K"
+  - delay: 102
+    content: "\r\e[1m\e[44m\e[37m▐____|\\________▌\e[0m \e[K"
+  - delay: 101
+    content: "\r\e[1m\e[44m\e[37m▐_____|\\_______▌\e[0m \e[K"
+  - delay: 104
+    content: "\r\e[1m\e[44m\e[37m▐______|\\______▌\e[0m \e[K"
+  - delay: 104
+    content: "\r\e[1m\e[44m\e[37m▐_______|\\_____▌\e[0m \e[K"
+  - delay: 105
+    content: "\r\e[1m\e[44m\e[37m▐________|\\____▌\e[0m \e[K"
+  - delay: 105
+    content: "\r\e[1m\e[44m\e[37m▐_________|\\___▌\e[0m \e[K"
+  - delay: 101
+    content: "\r\e[1m\e[44m\e[37m▐__________|\\__▌\e[0m \e[K"
+  - delay: 105
+    content: "\r\e[1m\e[44m\e[37m▐___________|\\_▌\e[0m \e[K"
+  - delay: 104
+    content: "\r\e[1m\e[44m\e[37m▐____________|\\▌\e[0m \e[K"
+  - delay: 105
+    content: "\r\e[1m\e[44m\e[37m▐____________/|▌\e[0m \e[K"
+  - delay: 105
+    content: "\r\e[1m\e[44m\e[37m▐___________/|_▌\e[0m \e[K"
+  - delay: 102
+    content: "\r\e[1m\e[44m\e[37m▐__________/|__▌\e[0m \e[K"
+  - delay: 104
+    content: "\r\e[1m\e[44m\e[37m▐_________/|___▌\e[0m \e[K"
+  - delay: 101
+    content: "\r\e[1m\e[44m\e[37m▐________/|____▌\e[0m \e[K"
+  - delay: 105
+    content: "\r\e[1m\e[44m\e[37m▐_______/|_____▌\e[0m \e[K"
+  - delay: 100
+    content: "\r\e[1m\e[44m\e[37m▐______/|______▌\e[0m \e[K"
+  - delay: 102
+    content: "\r\e[1m\e[44m\e[37m▐_____/|_______▌\e[0m \e[K"
+  - delay: 103
+    content: "\r\e[1m\e[44m\e[37m▐____/|________▌\e[0m \e[K"
+  - delay: 101
+    content: "\r\e[1m\e[44m\e[37m▐___/|_________▌\e[0m \e[K"
+  - delay: 104
+    content: "\r\e[K\e[?25h"
+  - delay: 103
+    content: "\r\n\e[93mCurrent conditions for \e[1mAtlantic City, NJ                   \e[0m\r\n\r\n  \e[36m\e[1mAir            Swell           Tide              Water     \e[0m\r\n  75°            Buoy 44091      low: 06:07 AM     76°       \r\n  ESE  15 mph    3.3ft @ 7sec    high: 12:13 PM    Trunks    \r\n\r\n\r\n"
+  - delay: 26
+    content: 'Josephs-MacBook-Pro:img josephiannone$ '
+  - delay: 1293
+    content: s
+  - delay: 135
+    content: w
+  - delay: 44
+    content: e
+  - delay: 146
+    content: l
+  - delay: 126
+    content: l
+  - delay: 76
+    content: ' '
+  - delay: 113
+    content: s
+  - delay: 90
+    content: p
+  - delay: 136
+    content: o
+  - delay: 90
+    content: t
+  - delay: 192
+    content: s
+  - delay: 517
+    content: "\r\n"
+  - delay: 783
+    content: "\e[?25l\r⠋\e[0m \e[K"
+  - delay: 145
+    content: "\r⠙\e[0m \e[K"
+  - delay: 87
+    content: "\r⠹\e[0m \e[K"
+  - delay: 119
+    content: "\r⠸\e[0m "
+  - delay: 38
+    content: "\e[K"
+  - delay: 130
+    content: "\r⠼\e[0m \e[K"
+  - delay: 106
+    content: "\r⠴\e[0m \e[K"
+  - delay: 102
+    content: "\r⠦\e[0m \e[K"
+  - delay: 126
+    content: "\r⠧\e[0m \e[K"
+  - delay: 98
+    content: "\r⠇\e[0m \e[K"
+  - delay: 119
+    content: "\r⠏\e[0m \e[K"
+  - delay: 82
+    content: "\r\e[K\e[?25h\r\n\e[1mYour Saved Spots\e[0m:\r\n\r\n  \e[36m\e[1mpipeline            \e[0m (0 - North Shore Oahu)\r\n  \e[36m\e[1mlighthouse          \e[0m (1 - Buxton)\r\n  \e[36m\e[1mlbi                 \e[0m (2 - Long Beach Island)\r\n  \e[36m\e[1mocnj                \e[0m (3 - Ocean City)\r\n  \e[36m\e[1mcocoa               \e[0m (4 - Cocoa Beach)\r\n  \e[36m\e[1mcm                  \e[0m (5 - Cape May)\r\n  \e[36m\e[1mdoac                \e[0m (6 - Atlantic City)\r\n  \e[36m\e[1msanquintin          \e[0m (7 - San Quintin)\r\n\r\n  * Use these nicknames or indexes as a command line argument to quickly retrieve the surf report.\r\n\r\n"
+  - delay: 24
+    content: 'Josephs-MacBook-Pro:img josephiannone$ '
+  - delay: 717
+    content: s
+  - delay: 181
+    content: w
+  - delay: 91
+    content: e
+  - delay: 717
+    content: l
+  - delay: 127
+    content: l
+  - delay: 313
+    content: ' '
+  - delay: 2588
+    content: l
+  - delay: 157
+    content: i
+  - delay: 124
+    content: g
+  - delay: 90
+    content: h
+  - delay: 101
+    content: t
+  - delay: 102
+    content: h
+  - delay: 157
+    content: o
+  - delay: 67
+    content: u
+  - delay: 79
+    content: s
+  - delay: 168
+    content: e
+  - delay: 1857
+    content: ' '
+  - delay: 349
+    content: '-'
+  - delay: 405
+    content: c
+  - delay: 169
+    content: f
+  - delay: 360
+    content: "\r\n"
+  - delay: 794
+    content: "\e[?25l\r⠋\e[0m \e[K"
+  - delay: 114
+    content: "\r⠙\e[0m \e[K"
+  - delay: 89
+    content: "\r⠹\e[0m "
+  - delay: 6
+    content: "\e[K"
+  - delay: 101
+    content: "\r⠸\e[0m "
+  - delay: 45
+    content: "\e[K"
+  - delay: 130
+    content: "\r⠼\e[0m \e[K"
+  - delay: 115
+    content: "\r⠴\e[0m \e[K"
+  - delay: 104
+    content: "\r⠦\e[0m \e[K"
+  - delay: 123
+    content: "\r⠧\e[0m \e[K"
+  - delay: 104
+    content: "\r⠇\e[0m "
+  - delay: 168
+    content: "\e[K"
+  - delay: 85
+    content: "\r\e[K\e[?25h\r\n\e[?25l\r\e[1m\e[44m\e[37m▐|\\____________▌\e[0m \e[K"
+  - delay: 106
+    content: "\r\e[1m\e[44m\e[37m▐_|\\___________▌\e[0m \e[K"
+  - delay: 104
+    content: "\r\e[1m\e[44m\e[37m▐__|\\__________▌\e[0m \e[K"
+  - delay: 106
+    content: "\r\e[1m\e[44m\e[37m▐___|\\_________▌\e[0m \e[K"
+  - delay: 104
+    content: "\r\e[1m\e[44m\e[37m▐____|\\________▌\e[0m \e[K"
+  - delay: 101
+    content: "\r\e[K\e[?25h"
+  - delay: 184
+    content: "\r\n\e[93mCurrent conditions for \e[1mBuxton, NC                          \e[0m\r\n\r\n  \e[36m\e[1mAir            Swell           Tide              Water     \e[0m\r\n  66° Clear      Buoy 41025      low: 06:04 AM     74°       \r\n  ESE  1 3mph    3.9ft @ 5sec    high: 12:08 PM    Trunks    \r\n\r\n\r\n\r\n\e[93mLong range forecast for \e[1mBuxton, NC\e[0m\r\n\r\n  \e[1mTODAY\e[0m\r\n  \e[92mAM: 1-3 ft\e[0m               \e[92mAM: 1-3 ft\e[0m             \r\n  Clean in the morning with W winds 10-15mph. Fairly clean \r\n  conditions for the afternoon with the winds shifting to the \r\n  \r\n  WSW. \r\n\r\n  Knee to thigh high SE short period wind swell with occasional \r\n  waist high sets. \r\n\r\n\r\n  \e[1mSATURDAY\e[0m\r\n  \e[94mAM: 2+ ft\e[0m                \e[31mAM: 2-4 ft\e[0m             \r\n  Light sideshore texture in the morning with SSW winds \r\n  10-15mph. Sideshore texture/chop conditions for the afternoon \r\n  as the winds increase to 15-20mph. \r\n\r\n  Knee to thigh high SSE short period wind swell in the morning \r\n  builds to waist to chest high for the afternoon. \r\n\r\n\r\n  \e[1mSUNDAY\e[0m\r\n  \e[94mAM: 3-4+ ft\e[0m              \e[31mAM: 3-4+ ft\e[0m            \r\n  Semi clean/textured in the morning with SW winds 10-15mph. \r\n  Sideshore texture/chop conditions for the afternoon with the \r\n  winds shifting to the SSW. \r\n\r\n  Waist to chest high SSE wind swell with occasional shoulder \r\n  high sets. \r\n\r\n\r\n  \e[1mMONDAY\e[0m\r\n  \e[31mAM: 4-5 ft\e[0m               \e[31mAM: 3-5 ft\e[0m             \r\n  Sideshore/choppy with SW winds 20-25mph in the morning \r\n  shifting SSW for the afternoon. \r\n\r\n  Chest to shoulder high S wind swell in the morning with \r\n  occasional head high sets. This drops a bit in the afternoon. \r\n\r\n\r\n  \e[1mTUESDAY\e[0m\r\n  \e[31mAM: 2-4 ft\e[0m               \e[31mAM: 2-4 ft\e[0m             \r\n  Sideshore texture/chop with SW winds 15-20mph in the morning \r\n  shifting SSW for the afternoon. \r\n\r\n  Waist to chest high S short period wind swell.\r\n\r\n\r\n  \e[1mWEDNESDAY\e[0m\r\n  \e[92mAM: 1-2 ft\e[0m               \e[92mAM: 2-3 ft\e[0m             \r\n  Glassy with NW winds less than 5mph in the morning shifting NE \r\n  for the afternoon. \r\n\r\n  Ankle to knee high SE wind swell in the morning builds to knee \r\n  to waist high for the afternoon. \r\n\r\n\r\n  \e[1mTHURSDAY\e[0m\r\n  \e[94mAM: 2+ ft\e[0m                \e[94mAM: 2+ ft\e[0m              \r\n  Light sideshore texture with SW winds 5-10mph in the morning \r\n  shifting SSW 10-15mph in the afternoon. \r\n\r\n  Knee to thigh high SE short period wind swell.\r\n\r\n\r\n\r\n"
+  - delay: 29
+    content: 'Josephs-MacBook-Pro:img josephiannone$ '
+  - delay: 8524
+    content: s
+  - delay: 135
+    content: w
+  - delay: 78
+    content: e
+  - delay: 158
+    content: l
+  - delay: 117
+    content: l
+  - delay: 85
+    content: ' '
+  - delay: 113
+    content: a
+  - delay: 180
+    content: d
+  - delay: 161
+    content: d
+  - delay: 1279
+    content: "\r\n"
+  - delay: 838
+    content: "\e[?25l\r⠋\e[0m \e[K"
+  - delay: 122
+    content: "\r⠙\e[0m \e[K"
+  - delay: 92
+    content: "\r⠹\e[0m \e[K"
+  - delay: 107
+    content: "\r⠸\e[0m "
+  - delay: 34
+    content: "\e[K"
+  - delay: 117
+    content: "\r⠼\e[0m "
+  - delay: 48
+    content: "\e[K"
+  - delay: 103
+    content: "\r⠴\e[0m \e[K"
+  - delay: 109
+    content: "\r⠦\e[0m \e[K"
+  - delay: 169
+    content: "\r⠧\e[0m \e[K"
+  - delay: 116
+    content: "\r⠇\e[0m \e[K"
+  - delay: 85
+    content: "\r\e[K\e[?25h\e[4m\r\nFollow the prompts below:\r\n\e[0m\r\n  \e[1m0  \e[0m\e[36m --> \e[0m United States\r\n  \e[1m1  \e[0m\e[36m --> \e[0m Mexico\r\n  \e[1m2  \e[0m\e[36m --> \e[0m Central America\r\n  \e[1m3  \e[0m\e[36m --> \e[0m Caribbean\r\n\r\nSelect a region (\e[1m0-3\e[0m): "
+  - delay: 1739
+    content: '0'
+  - delay: 324
+    content: "\r\nSelected \e[1mUnited States\e[0m\r\n\r\n\e[?25l\r\U0001F30D \e[0m \e[K"
+  - delay: 185
+    content: "\r\U0001F30E \e[0m \e[K"
+  - delay: 185
+    content: "\r\e[K\e[?25h  \e[1m0  \e[0m\e[36m --> \e[0m North East\r\n  \e[1m1  \e[0m\e[36m --> \e[0m Mid-Atlantic\r\n  \e[1m2  \e[0m\e[36m --> \e[0m South East\r\n  \e[1m3  \e[0m\e[36m --> \e[0m East Florida\r\n  \e[1m4  \e[0m\e[36m --> \e[0m West Florida\r\n  \e[1m5  \e[0m\e[36m --> \e[0m Texas\r\n  \e[1m6  \e[0m\e[36m --> \e[0m North West\r\n  \e[1m7  \e[0m\e[36m --> \e[0m California North\r\n  \e[1m8  \e[0m\e[36m --> \e[0m Southern California\r\n  \e[1m9  \e[0m\e[36m --> \e[0m Hawaii\r\n\r\nSelect a sub area (\e[1m0-9\e[0m): "
+  - delay: 3476
+    content: '8'
+  - delay: 168
+    content: "\r\nSelected \e[1mSouthern California\e[0m\r\n\r\n\e[?25l\r\U0001F30D \e[0m \e[K"
+  - delay: 186
+    content: "\r\U0001F30E \e[0m \e[K"
+  - delay: 184
+    content: "\r\e[K\e[?25h  \e[1m0  \e[0m\e[36m --> \e[0m Santa Barbara\r\n  \e[1m1  \e[0m\e[36m --> \e[0m Ventura County\r\n  \e[1m2  \e[0m\e[36m --> \e[0m North LA County\r\n  \e[1m3  \e[0m\e[36m --> \e[0m South LA County\r\n  \e[1m4  \e[0m\e[36m --> \e[0m North Orange County\r\n  \e[1m5  \e[0m\e[36m --> \e[0m South Orange County\r\n  \e[1m6  \e[0m\e[36m --> \e[0m San Diego North\r\n  \e[1m7  \e[0m\e[36m --> \e[0m San Diego South\r\n\r\nSelect a local area (\e[1m0-7\e[0m): "
+  - delay: 4532
+    content: '6'
+  - delay: 236
+    content: "\r\nSelected \e[1mSan Diego North\e[0m\r\n\r\n\e[4mAdd a nickname for this spot. (no spaces, limit 20 characters)\r\n\e[0m\r\n\e[1mNickname for San Diego North\e[0m: "
+  - delay: 1496
+    content: s
+  - delay: 170
+    content: d
+  - delay: 269
+    content: "\r\n\e[1m\r\nSpot added!\e[0m\r\n\r\nYou can now easily check the conditions and forecast for \e[1mSan Diego North\e[0m using the nickname \e[1msd\e[0m as a command line argument.\r\n\r\n"
+  - delay: 26
+    content: 'Josephs-MacBook-Pro:img josephiannone$ '
+  - delay: 1222
+    content: s
+  - delay: 169
+    content: w
+  - delay: 56
+    content: e
+  - delay: 135
+    content: l
+  - delay: 117
+    content: l
+  - delay: 51
+    content: ' '
+  - delay: 113
+    content: s
+  - delay: 56
+    content: p
+  - delay: 135
+    content: o
+  - delay: 372
+    content: t
+  - delay: 168
+    content: s
+  - delay: 282
+    content: "\r\n"
+  - delay: 901
+    content: "\e[?25l\r⠋\e[0m \e[K"
+  - delay: 102
+    content: "\r⠙\e[0m \e[K"
+  - delay: 89
+    content: "\r⠹\e[0m \e[K"
+  - delay: 117
+    content: "\r⠸\e[0m \e[K"
+  - delay: 97
+    content: "\r⠼\e[0m "
+  - delay: 7
+    content: "\e[K"
+  - delay: 74
+    content: "\r⠴\e[0m "
+  - delay: 51
+    content: "\e[K"
+  - delay: 212
+    content: "\r⠦\e[0m \e[K"
+  - delay: 176
+    content: "\r⠧\e[0m \e[K"
+  - delay: 107
+    content: "\r⠇\e[0m \e[K"
+  - delay: 127
+    content: "\r⠏\e[0m \e[K"
+  - delay: 82
+    content: "\r\e[K\e[?25h\r\n\e[1mYour Saved Spots\e[0m:\r\n\r\n  \e[36m\e[1mpipeline            \e[0m (0 - North Shore Oahu)\r\n  \e[36m\e[1mlighthouse          \e[0m (1 - Buxton)\r\n  \e[36m\e[1mlbi                 \e[0m (2 - Long Beach Island)\r\n  \e[36m\e[1mocnj                \e[0m (3 - Ocean City)\r\n  \e[36m\e[1mcocoa               \e[0m (4 - Cocoa Beach)\r\n  \e[36m\e[1mcm                  \e[0m (5 - Cape May)\r\n  \e[36m\e[1mdoac                \e[0m (6 - Atlantic City)\r\n  \e[36m\e[1msanquintin          \e[0m (7 - San Quintin)\r\n  \e[36m\e[1msd                  \e[0m (8 - San Diego North)\r\n\r\n  * Use these nicknames or indexes as a command line argument to quickly retrieve the surf report.\r\n\r\n"
+  - delay: 25
+    content: 'Josephs-MacBook-Pro:img josephiannone$ '
+  - delay: 495
+    content: s
+  - delay: 191
+    content: w
+  - delay: 81
+    content: e
+  - delay: 245
+    content: l
+  - delay: 129
+    content: l
+  - delay: 52
+    content: ' '
+  - delay: 202
+    content: s
+  - delay: 314
+    content: d
+  - delay: 2960
+    content: ' '
+  - delay: 1114
+    content: "\b\e[K"
+  - delay: 337
+    content: "\r\n"
+  - delay: 815
+    content: "\e[?25l\r⠋\e[0m \e[K"
+  - delay: 113
+    content: "\r⠙\e[0m \e[K"
+  - delay: 89
+    content: "\r⠹\e[0m \e[K"
+  - delay: 135
+    content: "\r⠸\e[0m \e[K"
+  - delay: 117
+    content: "\r⠼\e[0m \e[K"
+  - delay: 114
+    content: "\r⠴\e[0m \e[K"
+  - delay: 100
+    content: "\r⠦\e[0m \e[K"
+  - delay: 106
+    content: "\r⠧\e[0m \e[K"
+  - delay: 172
+    content: "\r⠇\e[0m \e[K"
+  - delay: 120
+    content: "\r⠏\e[0m \e[K"
+  - delay: 81
+    content: "\r\e[K\e[?25h\r\n\e[?25l\r\e[1m\e[44m\e[37m▐|\\____________▌\e[0m \e[K"
+  - delay: 104
+    content: "\r\e[1m\e[44m\e[37m▐_|\\___________▌\e[0m \e[K"
+  - delay: 105
+    content: "\r\e[1m\e[44m\e[37m▐__|\\__________▌\e[0m \e[K"
+  - delay: 104
+    content: "\r\e[1m\e[44m\e[37m▐___|\\_________▌\e[0m \e[K"
+  - delay: 102
+    content: "\r\e[1m\e[44m\e[37m▐____|\\________▌\e[0m \e[K"
+  - delay: 101
+    content: "\r\e[1m\e[44m\e[37m▐_____|\\_______▌\e[0m \e[K"
+  - delay: 104
+    content: "\r\e[K\e[?25h"
+  - delay: 104
+    content: "\r\n\e[93mCurrent conditions for \e[1mSan Diego North, CA                               \e[0m\r\n\r\n  \e[36m\e[1mAir             Swell          Tide              Water                   \e[0m\r\n  62° Clear       Buoy 46224     low: 07:52 AM     69°                     \r\n  WNW  4 10mph    3ft @ 15sec    high: 02:53 PM    Long Arm Spring Suit    \r\n\r\n\r\n"
+  - delay: 27
+    content: 'Josephs-MacBook-Pro:img josephiannone$ '
+  - delay: 916
+    content: s
+  - delay: 135
+    content: w
+  - delay: 45
+    content: e
+  - delay: 169
+    content: l
+  - delay: 139
+    content: l
+  - delay: 176
+    content: ' '
+  - delay: 180
+    content: '-'
+  - delay: 506
+    content: h
+  - delay: 1058
+    content: "\r\n"
+  - delay: 804
+    content: "\e[?25l\r⠋\e[0m \e[K"
+  - delay: 114
+    content: "\r⠙\e[0m \e[K"
+  - delay: 90
+    content: "\r⠹\e[0m \e[K"
+  - delay: 105
+    content: "\r⠸\e[0m "
+  - delay: 38
+    content: "\e[K"
+  - delay: 118
+    content: "\r⠼\e[0m \e[K"
+  - delay: 98
+    content: "\r⠴\e[0m \e[K"
+  - delay: 179
+    content: "\r⠦\e[0m \e[K"
+  - delay: 91
+    content: "\r⠧\e[0m \e[K"
+  - delay: 231
+    content: "\r⠇\e[0m \e[K"
+  - delay: 132
+    content: "\r\e[K\e[?25h\r\n\e[1mMANUAL:\e[0m\r\n\r\n  \e[4m\e[93mCOMMANDS:\e[0m\r\n  \e[1m[no argument]       \e[0m- Prompts user to select a location and by default will display \r\n                        the current conditions (unless other flags are specified).\r\n  \e[1m[nickname]          \e[0m- Will display either the current conditions, forecast, or both \r\n                        (depending on specified flags) for the given nickname.\r\n  \e[1mspots               \e[0m- Displays users saved spots by nickname.\r\n  \e[1madd                 \e[0m- Prompts user to add/save a new spot to user data store.\r\n  \e[1mremove [nickname]   \e[0m- Removes saved spot from user data store if [nickname] is a \r\n                        valid nickname or spot index.\r\n  \e[1mreset               \e[0m- Resets user data store to original state.\r\n\r\n  \e[4m\e[93mFLAGS:\e[0m\r\n  \e[1m-c                  \e[0m- Current conditions\r\n  \e[1m-f                  \e[0m- Forecast\r\n  \e[1m-h, --help          \e[0m- Displays manual\r\n\r\n  \e[1m*\e[0m '-h' and '--help' are only interpreted if used exclusively.\r\n  \e[1m*\e[0m Other flags can be used in combination i.e. -fc, -cf.\r\n\r\n\r\n"
+  - delay: 25
+    content: 'Josephs-MacBook-Pro:img josephiannone$ '
+  - delay: 3161
+    content: "logout\r\n"

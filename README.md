@@ -2,6 +2,9 @@
 
 ## A command line interface for checking the surf!
 
+![screenshot](img/swell.gif)
+
+
 ### Requires:
 - python3
 - pip
