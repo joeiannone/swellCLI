@@ -5,9 +5,8 @@
 ![screenshot](img/swell.gif)
 
 
-### Requires:
-- python3
-- pip
+### System Requirement:
+- python 3.4+
 
 ---
 
@@ -18,20 +17,12 @@
 :~/swellCLI $ source venv/bin/activate
 (venv) :~/swellCLI $ ./install.py
 ```
-**Without** virtualenv
-```
-:~/swellCLI $ python3 install.py
-```
 
 ---
 
 ### Usage:
 ```
 $ swell [args]
-```
-or
-```
-:~/swellCLI $ python3 main.py [args]
 ```
 
 ---
