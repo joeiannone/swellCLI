@@ -305,7 +305,7 @@ class swellCLI:
             #print(self.breakDownLongText(day['conditions_long_text'], table_w))
 
             am_str = str(am_color + 'AM: ' +  day['am_height'] + Colors.ENDC).ljust(col_w)
-            pm_str = str(pm_color + 'AM: ' +  day['pm_height'] + Colors.ENDC).ljust(col_w)
+            pm_str = str(pm_color + 'PM: ' +  day['pm_height'] + Colors.ENDC).ljust(col_w)
 
             view += ''.ljust(table_pad) + day_str + '\n'
             view += ''.ljust(table_pad) + am_str
